@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import localFont from "next/font/local";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { ContactFormDialogProvider } from "@/components/forms/ContactFormDialogProvider";
 import { JsonLd } from "@/components/shared/JsonLd";
@@ -15,6 +15,13 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-poppins",
 });
 
 const grenettePro = localFont({
@@ -95,7 +102,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${grenettePro.variable} h-full scroll-smooth antialiased overflow-x-clip`}
+      className={`${inter.variable} ${poppins.variable} ${grenettePro.variable} h-full scroll-smooth antialiased overflow-x-clip`}
     >
       <GoogleTagManager gtmId="GTM-PC7XMGZ8" />
       <body className="flex min-h-full flex-col font-sans overflow-x-clip">
