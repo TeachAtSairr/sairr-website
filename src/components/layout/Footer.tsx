@@ -51,7 +51,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-mist text-[#5d5d5d]">
+    <footer className="bg-mist text-[#5d5d5d] border-[0.5px] border-t-[#5d5d5d]/50">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
           <div className="max-w-sm">

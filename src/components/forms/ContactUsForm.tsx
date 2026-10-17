@@ -64,13 +64,13 @@ export function ContactUsForm({
 }: ContactUsFormProps) {
   const isTeal = appearance === "teal";
   const labels = isTeal
-    ? "text-[11px] font-medium uppercase tracking-[0.12em] text-white"
+    ? "text-[9px] md:text-[11px] font-medium uppercase tracking-[0.12em] text-white"
     : labelClassName;
   const fields = isTeal
-    ? "h-10 rounded-lg border-0 bg-white px-4 text-base text-charcoal shadow-none transition-colors placeholder:text-[#5d5d5d]/70 focus-visible:ring-2 focus-visible:ring-white/30 md:text-sm"
+    ? "h-8 md:h-10 rounded-[4px] md:rounded-[8px] border-0 bg-white px-2 md:px-4 text-base text-charcoal shadow-none transition-colors placeholder:text-[11px] md:placeholder:text-sm placeholder:text-[#5d5d5d]/70 focus-visible:ring-2 focus-visible:ring-white/30 md:text-sm"
     : fieldClassName;
   const textareas = isTeal
-    ? "min-h-20 rounded-lg border-0 bg-white px-4 py-3 text-base text-charcoal shadow-none transition-colors placeholder:text-[#5d5d5d]/70 focus-visible:ring-2 focus-visible:ring-white/30 md:text-sm"
+    ? "min-h-20 rounded-[4px] md:rounded-[8px] border-0 bg-white px-2 md:px-4 py-3 text-base text-charcoal shadow-none transition-colors placeholder:text-[11px] md:placeholder:text-sm placeholder:text-[#5d5d5d]/70 focus-visible:ring-2 focus-visible:ring-white/30 md:text-sm"
     : textareaClassName;
   const optionalMuted = isTeal
     ? "normal-case tracking-normal text-white/70"
@@ -186,7 +186,7 @@ export function ContactUsForm({
       )}
 
       {/* Name + Phone */}
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-3 md:gap-6 grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="cu-name" className={labels}>
             Name
@@ -211,7 +211,7 @@ export function ContactUsForm({
             id="cu-phone"
             type="tel"
             inputMode="numeric"
-            placeholder="Your 10 digit WhatsApp no"
+            placeholder="Your 10 digit WhatsApp no."
             maxLength={10}
             aria-invalid={!!errors.phone}
             className={cn(fields, errors.phone && "border-destructive")}
@@ -262,7 +262,7 @@ export function ContactUsForm({
             aria-invalid={!!errors.topic}
             className={cn(
               fields,
-              "w-full appearance-none pr-10",
+              "w-full appearance-none pr-10 !text-[11px] md:!text-sm",
               !selectedTopic ? "text-[#999]" : "text-gray-900",
               errors.topic && "border-destructive",
             )}
