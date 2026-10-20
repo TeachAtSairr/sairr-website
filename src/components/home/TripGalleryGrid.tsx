@@ -11,10 +11,26 @@ function gallerySrc(image: GalleryImage) {
   return image.src ?? `https://picsum.photos/seed/${image.seed}/1200/800`;
 }
 
+const SWIPE_OFFSET_THRESHOLD = 48;
+
 type TripGalleryGridProps = {
   images: GalleryImage[];
   className?: string;
 };
+
+function useMobileGallerySwipe() {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const sync = () => setEnabled(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
+  return enabled;
+}
 
 type GalleryTileProps = {
   image: GalleryImage;
@@ -244,8 +260,10 @@ function GalleryMosaic({
 
 export function TripGalleryGrid({ images, className }: TripGalleryGridProps) {
   const reduceMotion = useReducedMotion();
+  const mobileSwipe = useMobileGallerySwipe();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const thumbnailRailRef = useRef<HTMLDivElement>(null);
+  const mainImageTouchStart = useRef<{ x: number; y: number } | null>(null);
 
   const closeLightbox = useCallback(() => setLightboxIndex(null), []);
 
@@ -262,6 +280,36 @@ export function TripGalleryGrid({ images, className }: TripGalleryGridProps) {
       return current >= images.length - 1 ? 0 : current + 1;
     });
   }, [images.length]);
+
+  const handleMainImageTouchStart = useCallback(
+    (event: React.TouchEvent<HTMLDivElement>) => {
+      if (!mobileSwipe) return;
+      const touch = event.touches[0];
+      mainImageTouchStart.current = { x: touch.clientX, y: touch.clientY };
+    },
+    [mobileSwipe],
+  );
+
+  const handleMainImageTouchEnd = useCallback(
+    (event: React.TouchEvent<HTMLDivElement>) => {
+      if (!mobileSwipe || !mainImageTouchStart.current) return;
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - mainImageTouchStart.current.x;
+      const dy = touch.clientY - mainImageTouchStart.current.y;
+      mainImageTouchStart.current = null;
+
+      if (
+        Math.abs(dx) < SWIPE_OFFSET_THRESHOLD ||
+        Math.abs(dx) < Math.abs(dy)
+      ) {
+        return;
+      }
+
+      if (dx < 0) showNext();
+      else showPrev();
+    },
+    [mobileSwipe, showNext, showPrev],
+  );
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -332,17 +380,24 @@ export function TripGalleryGrid({ images, className }: TripGalleryGridProps) {
               transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
               onClick={(event) => event.stopPropagation()}
             >
-              {/* Native img so lightbox respects each photo's intrinsic aspect ratio */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <div
                 key={activeImage.id}
-                src={gallerySrc(activeImage)}
-                alt={activeImage.alt}
-                className="max-h-[75vh] w-auto max-w-full rounded-lg border border-mist/15 object-contain shadow-2xl"
-                style={{
-                  objectPosition: activeImage.objectPosition ?? "center",
-                }}
-              />
+                className="max-w-full touch-pan-y"
+                onTouchStart={handleMainImageTouchStart}
+                onTouchEnd={handleMainImageTouchEnd}
+              >
+                {/* Native img so lightbox respects each photo's intrinsic aspect ratio */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={gallerySrc(activeImage)}
+                  alt={activeImage.alt}
+                  className="max-h-[75vh] w-auto max-w-full rounded-lg border border-mist/15 object-contain shadow-2xl"
+                  style={{
+                    objectPosition: activeImage.objectPosition ?? "center",
+                  }}
+                  draggable={false}
+                />
+              </div>
 
               <div
                 ref={thumbnailRailRef}

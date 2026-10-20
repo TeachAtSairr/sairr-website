@@ -70,17 +70,20 @@ function useSlidesPerView(config: SlidesPerView) {
     const mqDesktop = window.matchMedia("(min-width: 1024px)");
 
     const update = () => {
-      if (mqDesktop.matches) setCount(desktop);
-      else if (mqTablet.matches) setCount(tablet);
+      const width = window.innerWidth;
+      if (width >= 1024) setCount(desktop);
+      else if (width >= 768) setCount(tablet);
       else setCount(mobile);
     };
 
     update();
     mqTablet.addEventListener("change", update);
     mqDesktop.addEventListener("change", update);
+    window.addEventListener("resize", update);
     return () => {
       mqTablet.removeEventListener("change", update);
       mqDesktop.removeEventListener("change", update);
+      window.removeEventListener("resize", update);
     };
   }, [mobile, tablet, desktop]);
 
@@ -129,10 +132,14 @@ export function CarouselSection<T>({
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");
-    const updateMq = () => setIsLg(mq.matches);
+    const updateMq = () => setIsLg(window.innerWidth >= 1024);
     updateMq();
     mq.addEventListener("change", updateMq);
-    return () => mq.removeEventListener("change", updateMq);
+    window.addEventListener("resize", updateMq);
+    return () => {
+      mq.removeEventListener("change", updateMq);
+      window.removeEventListener("resize", updateMq);
+    };
   }, []);
 
   useEffect(() => {

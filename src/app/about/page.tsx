@@ -171,7 +171,7 @@ export default function AboutPage() {
                       </p>
                     </div>
                     <Link
-                      href={siteConfig.social.linkedin}
+                      href="https://www.linkedin.com/in/tanmay-khandelwal-7486a5a3"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Tanmay Khandelwal on LinkedIn"
