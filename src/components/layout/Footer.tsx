@@ -13,7 +13,7 @@ const exploreLinks = [
   { href: homeHeroHref, label: "Home" },
   { href: "/#destinations", label: "Destinations" },
   { href: "/why-sairr", label: "Why Sairr" },
-  { href: "#", label: "About Us" },
+  { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
@@ -128,7 +128,7 @@ export function Footer() {
         </div>
 
         <Link
-              href="#"
+              href="/about#note-from-founder"
               className="mt-8 inline-flex items-center gap-1 text-sm md:text-lg font-[400] text-brand transition-colors hover:text-[#0E5E6F]"
             >
               A note from founder

@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 const GOLD_BG = "#C8A867";
 
 export type ExperienceCtaSectionData = {
+  eyebrow?: string;
   heading: string;
   para: string;
   primaryCtaLabel?: string;
@@ -25,6 +26,7 @@ export type ExperienceCtaSectionProps = ExperienceCtaSectionData & {
 };
 
 export function ExperienceCtaSection({
+  eyebrow,
   heading,
   para,
   primaryCtaLabel = "Tell Us You're Interested →",
@@ -37,9 +39,16 @@ export function ExperienceCtaSection({
   return (
     <section
       className={cn("px-4 py-8 sm:px-6 sm:py-20 lg:px-8 lg:py-16", className)}
-      style={{ backgroundColor: GOLD_BG }}
+      style={className?.includes("bg-") ? undefined : { backgroundColor: GOLD_BG }}
     >
       <div className="mx-auto max-w-3xl text-center">
+        {eyebrow ? (
+          <FadeIn>
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-[#EAA850] sm:text-xs">
+              {eyebrow}
+            </p>
+          </FadeIn>
+        ) : null}
         <AnimatedSectionHeader
           heading={heading}
           description={para}
