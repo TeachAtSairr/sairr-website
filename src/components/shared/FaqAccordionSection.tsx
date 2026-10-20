@@ -48,7 +48,7 @@ export function FaqAccordionSection({
   return (
     <section
       id={id}
-      className={cn("scroll-mt-24 border-t border-charcoal/10 bg-mist", className)}
+      className={cn("scroll-mt-24 bg-mist", className)}
     >
       <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-20">
         <AnimatedSectionHeader
