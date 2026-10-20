@@ -12,17 +12,17 @@ const MOMENT_CARD_WIDTH_PX = 306.38;
 
 function MomentCard({ moment }: { moment: PuriMomentCard }) {
   return (
-    <article className="group flex h-full w-full flex-col bg-white p-4 sm:p-5 lg:h-[468.83px] lg:w-[306.38px] lg:p-7">
+    <article className="group flex h-full w-full flex-col bg-white p-3.5 sm:p-5 lg:h-[468.83px] lg:w-[306.38px] lg:p-7">
       <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-charcoal/5">
         <Image
           src={moment.image}
           alt={moment.alt}
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-          sizes="(max-width: 1024px) 80vw, 233px"
+          sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 233px"
         />
       </div>
-      <p className="mt-4 text-[16px] leading-relaxed text-[#5d5d5d] lg:mt-5">
+      <p className="mt-3 text-xs leading-relaxed text-[#5d5d5d] sm:mt-4 sm:text-sm lg:mt-5 lg:text-[16px]">
         <span className="font-bold text-charcoal">{moment.title}</span>{" "}
         {moment.line}
       </p>
@@ -63,11 +63,11 @@ export function PuriMoments({
             trackWrapperClassName={cn(
               "bg-[#E9DFC8] py-6 sm:py-8 overflow-hidden",
               flush
-                ? "w-full pl-5 pr-0"
+                ? "-mx-4 sm:-mx-6 lg:mx-0 pl-5 pr-0"
                 : "-mr-4 pl-4 sm:-mr-6 sm:pl-6 lg:-mr-8 lg:pl-8",
             )}
             slideClassName="py-2 last:mr-5"
-            gap={{ mobile: 8, tablet: 20, desktop: 20 }}
+            gap={{ mobile: 12, tablet: 20, desktop: 20 }}
             fixedSlideWidthLg={MOMENT_CARD_WIDTH_PX}
             items={cards}
             getKey={(item) => item.id}
@@ -76,12 +76,13 @@ export function PuriMoments({
                 index={index}
                 direction="left"
                 stagger={0.1}
+                revealOnScroll={false}
                 className="h-full bg-transparent"
               >
                 <MomentCard moment={item} />
               </CardRevealCarouselItem>
             )}
-            slidesPerView={{ mobile: 1, tablet: 2, desktop: 3 }}
+            slidesPerView={{ mobile: 1.45, tablet: 2, desktop: 3 }}
             ariaLabel="Moments that make Puri"
             autoplay={false}
             showDots
