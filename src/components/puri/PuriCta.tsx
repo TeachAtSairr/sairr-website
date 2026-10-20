@@ -6,13 +6,14 @@ import {
 } from "@/components/shared/ExperienceCtaSection";
 import { useContactFormDialog } from "@/components/forms/ContactFormDialogProvider";
 import { ctaClass } from "@/lib/cta";
-import type { TravelDestination } from "@/lib/validations/contact";
+import type { ContactFormIntent, TravelDestination } from "@/lib/validations/contact";
 
 export type { ExperienceCtaSectionData };
 
 export type PuriCtaProps = {
   sectionData: ExperienceCtaSectionData;
-  notifyDestination: TravelDestination;
+  notifyDestination?: TravelDestination;
+  intent?: ContactFormIntent;
   ctaPage?: string;
   className?: string;
   hrefTxt?: string;
@@ -20,7 +21,8 @@ export type PuriCtaProps = {
 
 export function PuriCta({
   sectionData,
-  notifyDestination,
+  notifyDestination = "Puri & Bhubaneswar",
+  intent = "private-journey",
   ctaPage = "puri",
   className,
   hrefTxt,
@@ -36,7 +38,7 @@ export function PuriCta({
       onPrimaryClick={() =>
         openContactForm({
           destination: notifyDestination,
-          intent: "private-journey",
+          intent,
           ctaClass: bottomCta,
         })
       }
