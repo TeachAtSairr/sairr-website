@@ -118,7 +118,7 @@ export default function WhySairrPage() {
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 lg:pb-20">
         <div className="-mt-20 overflow-hidden rounded-lg border border-[#E9DFC8]/90 bg-white p-5 shadow-[0_10px_35px_rgba(0,0,0,0.06)] sm:-mt-24 sm:p-6 md:-mt-32 md:p-7 lg:-mt-28 lg:py-2 lg:pl-6 lg:pr-2">
           <FadeIn>
-            <div className="flex flex-row items-center justify-center gap-14">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-14">
               <div className="text-sm leading-relaxed text-[#5D5D5D] sm:text-base lg:text-[1.25rem] lg:leading-[1.5]">
                 <p>
                   <span className="font-semibold italic text-[#0E5E6F]">
@@ -138,7 +138,7 @@ export default function WhySairrPage() {
                 alt="Friends strolling along a tropical beach"
                 width={410}
                 height={213.07}
-                className="object-cover rounded-lg"
+                className="w-full max-w-[410px] md:w-[410px] h-auto md:h-[213.07px] object-cover rounded-lg shrink-0"
               />
             </div>
           </FadeIn>
@@ -151,21 +151,21 @@ export default function WhySairrPage() {
           <FadeIn>
             <div className="relative rounded-lg border border-[#C8A867] bg-[#FDFBF2] px-5 pb-8 pt-14 sm:px-8 sm:pb-10 sm:pt-16 md:pt-24 lg:pt-28">
               <div
-                className="absolute left-1/2 top-0 flex max-w-[calc(100%-2rem)] -translate-x-2/3 -translate-y-1/2 items-center gap-3 bg-[#FDFBF2] px-3 sm:max-w-none sm:gap-4 sm:px-5"
+                className="absolute left-1/2 top-0 flex max-w-[calc(100%-2rem)] -translate-x-1/2 sm:-translate-x-2/3 -translate-y-1/2 items-center gap-2 sm:gap-3 bg-[#FDFBF2] px-2 sm:px-3 sm:max-w-none md:gap-4 md:px-5"
               >
                 <Image
                   src="/why-sairr/confused-couple.svg"
                   alt=""
                   width={98.93}
                   height={105.06}
-                  className="w-[98.93px] h-[105.06px]"
+                  className="w-14 sm:w-20 md:w-[98.93px] h-auto md:h-[105.06px] shrink-0"
                   aria-hidden
                 />
-                <h2 className="font-heading text-xl font-semibold text-black sm:text-2xl lg:text-[2.25rem]">
+                <h2 className="font-heading text-lg font-semibold text-black sm:text-2xl lg:text-[2.25rem]">
                   What gets in the way
                 </h2>
               </div>
-              <div className="grid gap-8 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-16">
+              <div className="mt-2 sm:mt-0 grid gap-8 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-16">
                 {whatGetsInTheWay.map((item) => (
                   <div key={item.title} className="flex gap-4 sm:gap-5">
                     <Image
@@ -173,7 +173,7 @@ export default function WhySairrPage() {
                       alt=""
                       width={62}
                       height={57}
-                      className="object-contain"
+                      className="w-12 h-auto sm:w-[62px] sm:h-[57px] shrink-0 object-contain"
                       aria-hidden
                     />
                     <div>
@@ -193,8 +193,8 @@ export default function WhySairrPage() {
       </section>
 
       {/* Gap Sairr fills */}
-      <section className="relative overflow-hidden bg-[#0E5E6F] py-14 sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-6xl flex flex-row items-center justify-between">
+      <section className="relative overflow-hidden bg-[#0E5E6F] py-14 sm:py-14 lg:py-10">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14">
           <FadeIn>
             <div className="text-center lg:text-left">
               <h2 className="font-heading text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-[2.313rem]">
@@ -202,8 +202,8 @@ export default function WhySairrPage() {
                 <br />
                 Travel you can count on.
               </h2>
-              <div className="mx-auto mt-8 h-[1px] w-20 bg-[#C8A867] lg:mx-0" />
-              <p className="mt-8 text-lg font-medium text-[#C8A867] sm:text-3xl">
+              <div className="mx-auto mt-6 sm:mt-8 h-[1px] w-20 bg-[#C8A867] lg:mx-0" />
+              <p className="mt-6 sm:mt-8 text-lg font-medium text-[#C8A867] sm:text-3xl">
                 That&apos;s the gap Sairr exists to fill.
               </p>
             </div>
@@ -214,7 +214,7 @@ export default function WhySairrPage() {
               alt="Group enjoying dinner by the beach at sunset"
               width={354.79}
               height={280}
-              className="object-cover w-[354.79px] h-[280px]"
+              className="object-cover w-full max-w-[354.79px] h-auto lg:w-[354.79px] lg:h-[280px]"
             />
           </FadeIn>
         </div>
@@ -235,7 +235,7 @@ export default function WhySairrPage() {
 
           <div className="mt-10 sm:mt-12">
             <FadeIn>
-              <div className="flex flex-row items-center justify-between gap-40">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 lg:gap-40">
                 <div className="flex gap-3 sm:gap-4">
                   <SectionBullet />
                   <div className="text-sm leading-relaxed text-[#5D5D5D] sm:text-base lg:text-lg">
@@ -261,13 +261,13 @@ export default function WhySairrPage() {
                   alt="Sairr travellers greeted at the airport"
                   width={237}
                   height={205.83}
-                  className="object-cover w-[237px] h-[205.83px]"
+                  className="object-cover w-[200px] sm:w-[237px] h-auto lg:w-[237px] lg:h-[205.83px] shrink-0"
                 />
               </div>
             </FadeIn>
 
             <FadeIn delay={0.05}>
-              <div className="mt-10 sm:mt-12 border-t-[1px] border-[#C8A867] py-10 sm:py-12 flex flex-row items-center justify-between gap-40">
+              <div className="mt-10 sm:mt-12 border-t-[1px] border-[#C8A867] py-10 sm:py-12 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 lg:gap-40">
                 <div className="flex gap-3 sm:gap-4">
                   <SectionBullet />
                   <div className="text-sm leading-relaxed text-[#5D5D5D] sm:text-base lg:text-lg">
@@ -304,13 +304,13 @@ export default function WhySairrPage() {
                   alt="Sairr group with their host at a resort"
                   width={401.65}
                   height={262.12}
-                  className="object-cover"
+                  className="object-cover w-full max-w-[401.65px] h-auto lg:w-[401.65px] lg:h-[262.12px] shrink-0"
                 />
               </div>
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <div className="relative border-t-[1px] border-[#C8A867] py-10 sm:py-12 flex flex-row items-start justify-between gap-40">
+              <div className="relative border-t-[1px] border-[#C8A867] py-10 sm:py-12 flex flex-col md:flex-row items-start justify-between gap-8 md:gap-16 lg:gap-40">
                 <Image
                   src="/why-sairr/two-birds.svg"
                   alt=""
@@ -336,7 +336,7 @@ export default function WhySairrPage() {
                   alt="Family member receiving a trip update on their phone"
                   width={244.84}
                   height={226.78}
-                  className="w-[244.84px] h-[226.78px]"
+                  className="w-[200px] sm:w-[244.84px] h-auto lg:w-[244.84px] lg:h-[226.78px] shrink-0 self-center md:self-start"
                 />
               </div>
             </FadeIn>
