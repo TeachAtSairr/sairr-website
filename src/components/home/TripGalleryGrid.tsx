@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -11,26 +11,10 @@ function gallerySrc(image: GalleryImage) {
   return image.src ?? `https://picsum.photos/seed/${image.seed}/1200/800`;
 }
 
-const SWIPE_OFFSET_THRESHOLD = 48;
-
 type TripGalleryGridProps = {
   images: GalleryImage[];
   className?: string;
 };
-
-function useMobileGallerySwipe() {
-  const [enabled, setEnabled] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 767px)");
-    const sync = () => setEnabled(media.matches);
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
-
-  return enabled;
-}
 
 type GalleryTileProps = {
   image: GalleryImage;
@@ -260,56 +244,76 @@ function GalleryMosaic({
 
 export function TripGalleryGrid({ images, className }: TripGalleryGridProps) {
   const reduceMotion = useReducedMotion();
-  const mobileSwipe = useMobileGallerySwipe();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const thumbnailRailRef = useRef<HTMLDivElement>(null);
-  const mainImageTouchStart = useRef<{ x: number; y: number } | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const lightboxWasOpenRef = useRef(false);
 
   const closeLightbox = useCallback(() => setLightboxIndex(null), []);
 
-  const showPrev = useCallback(() => {
-    setLightboxIndex((current) => {
-      if (current === null) return null;
-      return current <= 0 ? images.length - 1 : current - 1;
-    });
-  }, [images.length]);
-
-  const showNext = useCallback(() => {
-    setLightboxIndex((current) => {
-      if (current === null) return null;
-      return current >= images.length - 1 ? 0 : current + 1;
-    });
-  }, [images.length]);
-
-  const handleMainImageTouchStart = useCallback(
-    (event: React.TouchEvent<HTMLDivElement>) => {
-      if (!mobileSwipe) return;
-      const touch = event.touches[0];
-      mainImageTouchStart.current = { x: touch.clientX, y: touch.clientY };
-    },
-    [mobileSwipe],
-  );
-
-  const handleMainImageTouchEnd = useCallback(
-    (event: React.TouchEvent<HTMLDivElement>) => {
-      if (!mobileSwipe || !mainImageTouchStart.current) return;
-      const touch = event.changedTouches[0];
-      const dx = touch.clientX - mainImageTouchStart.current.x;
-      const dy = touch.clientY - mainImageTouchStart.current.y;
-      mainImageTouchStart.current = null;
-
-      if (
-        Math.abs(dx) < SWIPE_OFFSET_THRESHOLD ||
-        Math.abs(dx) < Math.abs(dy)
-      ) {
+  const scrollToIndex = useCallback(
+    (index: number, behavior: ScrollBehavior = "smooth") => {
+      const el = carouselRef.current;
+      if (!el || el.clientWidth === 0) {
+        setLightboxIndex(index);
         return;
       }
-
-      if (dx < 0) showNext();
-      else showPrev();
+      setLightboxIndex(index);
+      el.scrollTo({
+        left: index * el.clientWidth,
+        behavior: reduceMotion ? "auto" : behavior,
+      });
     },
-    [mobileSwipe, showNext, showPrev],
+    [reduceMotion],
   );
+
+  const showPrev = useCallback(() => {
+    if (lightboxIndex === null) return;
+    const next =
+      lightboxIndex <= 0 ? images.length - 1 : lightboxIndex - 1;
+    scrollToIndex(next);
+  }, [images.length, lightboxIndex, scrollToIndex]);
+
+  const showNext = useCallback(() => {
+    if (lightboxIndex === null) return;
+    const next =
+      lightboxIndex >= images.length - 1 ? 0 : lightboxIndex + 1;
+    scrollToIndex(next);
+  }, [images.length, lightboxIndex, scrollToIndex]);
+
+  const handleCarouselScroll = useCallback(() => {
+    const el = carouselRef.current;
+    if (!el || el.clientWidth === 0) return;
+    const index = Math.round(el.scrollLeft / el.clientWidth);
+    if (index < 0 || index >= images.length) return;
+    setLightboxIndex((current) => (current === index ? current : index));
+  }, [images.length]);
+
+  useLayoutEffect(() => {
+    if (lightboxIndex === null) {
+      lightboxWasOpenRef.current = false;
+      return;
+    }
+
+    const el = carouselRef.current;
+    if (!el) return;
+
+    if (!lightboxWasOpenRef.current) {
+      el.scrollLeft = lightboxIndex * el.clientWidth;
+      lightboxWasOpenRef.current = true;
+    }
+  }, [lightboxIndex]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+
+    for (const offset of [-1, 0, 1]) {
+      const index =
+        (lightboxIndex + offset + images.length) % images.length;
+      const preload = new window.Image();
+      preload.src = gallerySrc(images[index]);
+    }
+  }, [images, lightboxIndex]);
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -381,22 +385,34 @@ export function TripGalleryGrid({ images, className }: TripGalleryGridProps) {
               onClick={(event) => event.stopPropagation()}
             >
               <div
-                key={activeImage.id}
-                className="max-w-full touch-pan-y"
-                onTouchStart={handleMainImageTouchStart}
-                onTouchEnd={handleMainImageTouchEnd}
+                ref={carouselRef}
+                className="flex w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                onScroll={handleCarouselScroll}
               >
-                {/* Native img so lightbox respects each photo's intrinsic aspect ratio */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={gallerySrc(activeImage)}
-                  alt={activeImage.alt}
-                  className="max-h-[75vh] w-auto max-w-full rounded-lg border border-mist/15 object-contain shadow-2xl"
-                  style={{
-                    objectPosition: activeImage.objectPosition ?? "center",
-                  }}
-                  draggable={false}
-                />
+                {images.map((image, index) => {
+                  const isActive = index === lightboxIndex;
+                  return (
+                    <div
+                      key={image.id}
+                      className="flex w-full shrink-0 snap-center snap-always justify-center"
+                      aria-hidden={!isActive}
+                    >
+                      {/* Native img so lightbox respects each photo's intrinsic aspect ratio */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={gallerySrc(image)}
+                        alt={isActive ? image.alt : ""}
+                        loading="eager"
+                        decoding="async"
+                        className="max-h-[75vh] w-auto max-w-full rounded-lg object-contain shadow-2xl"
+                        style={{
+                          objectPosition: image.objectPosition ?? "center",
+                        }}
+                        draggable={false}
+                      />
+                    </div>
+                  );
+                })}
               </div>
 
               <div
@@ -417,7 +433,7 @@ export function TripGalleryGrid({ images, className }: TripGalleryGridProps) {
                       <button
                         key={image.id}
                         type="button"
-                        onClick={() => setLightboxIndex(index)}
+                        onClick={() => scrollToIndex(index)}
                         aria-label={`Show image ${index + 1} of ${images.length}`}
                         aria-current={isSelected ? "true" : undefined}
                         data-thumbnail-index={index}
