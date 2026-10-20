@@ -146,7 +146,7 @@ export default function AboutPage() {
       </section>
 
       {/* Founder Note Section */}
-      <section className="bg-[#FDFBF2] pb-20 sm:pb-24 lg:pb-28">
+      <section id="note-from-founder" className="bg-[#FDFBF2] pb-20 sm:pb-24 lg:pb-28 scroll-mt-12 md:scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="rounded-2xl border border-[#E9DFC8] bg-white p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] sm:rounded-3xl sm:p-10 lg:p-12">
@@ -189,7 +189,7 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div id="note-from-founder" className="scroll-mt-24">
+                <div className="scroll-mt-24">
                   <div className="text-xl font-semibold text-[#0E5E6F] sm:text-[1.375rem]">
                     A note from the founder
                   </div>
