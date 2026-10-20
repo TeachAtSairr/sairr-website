@@ -2,66 +2,60 @@ import Image from "next/image";
 import { whySairrFaqs } from "@/data/faqs";
 import { CtaSection } from "@/components/home/CtaSection";
 import { PuriFaqs } from "@/components/puri/PuriFaqs";
-import { WhySairrIntroSection } from "@/components/why-sairr/WhySairrIntroSection";
-import { WhySairrTravelSection } from "@/components/why-sairr/WhySairrTravelSection";
-import { WhySairrCareSection } from "@/components/why-sairr/WhySairrCareSection";
+import { FadeIn } from "@/components/shared/FadeIn";
 import { createMetadata } from "@/lib/seo";
 
-const introSection = {
-  title: "The desire to explore doesn't change.\nWhat you want from travel does.",
-  description:
-    "Sairr designs travel for life after 50, around the person taking it: your pace & preferences, the experiences you want, and the ones you'd rather skip. Every detail is worked out, from the first call to the flight back home.",
-  highlight: "So there's less to plan, and more to actually be in.",
-  separatorIcon: "/why-sairr/1-bird.svg",
-};
-
-const travelSection = {
-  image: {
-    src: "/why-sairr/TropicalBeachStroll.webp",
-    alt: "Friends strolling along a tropical beach",
-    width: 1806,
-    height: 1192,
+const whatGetsInTheWay = [
+  {
+    icon: "/why-sairr/plan-yourself.svg",
+    title: "Plan it yourself",
+    description: "Juggling flights, stays, transfers and every detail",
   },
-  title:
-    "Most people don't stop wanting to travel. What changes is what it takes to say yes.",
-  description:
-    "Plan it yourself, and you're juggling flights, stays, transfers, every detail. Join a conventional group tour, and you're keeping pace with people at a different stage of life. Rely on family, and you're waiting for everyone's calendars to align. Book through a traditional operator, and you're wondering who has your back once the trip begins.",
-  conclusionTitle: "There should be another way.",
-  conclusion:
-    "Your timeline. Your kind of company. Someone on-ground who has your back, from start to finish.\nThat's the gap Sairr exists to fill.",
-};
+  {
+    icon: "/why-sairr/travel-with-family.svg",
+    title: "Travel with family",
+    description: "Waiting for everyone's calendars to align",
+  },
+  {
+    icon: "/why-sairr/group-tour.svg",
+    title: "Join a conventional group tour",
+    description: "Keeping pace with people at a different stage of life",
+  },
+  {
+    icon: "/why-sairr/traditional-operator.svg",
+    title: "Book through a traditional operator",
+    description: "Wondering who has your back once the trip begins",
+  },
+] as const;
 
-const careSection = {
-  title: "Thought through before you leave. Taken care of until you're home.",
-  paragraphs: [
-    "Before a trip is ever opened for booking, every route, stay, transfer and itinerary is extensively vetted on the ground for pace, hygiene, food, amenities, location, timing, all of it. Each trip is built as a full experience, not assembled after people sign up. We plan for what's right, not what's easiest to sell.",
-    "We'd rather go deep on a few hand-picked places than wide across many. Every stay is 4-star and up. Transport that's well-maintained, never packed to the last seat. Your dietary needs, met all the way through. And a trained Sairr host with you, right there on the ground, so you're never the one figuring it out.",
-    "And that's not all. Your host will capture the moments too, so you can just be in them.",
-    "While you're on the journey with us, your family gets daily updates about your whereabouts and a human point of contact at Sairr, in case they need to reach out to us.",
-  ],
-  highlight: "That's how we turn the desire to travel into the confidence to go.",
-  decorativeIcon: "/why-sairr/2-birds.svg",
-  images: [
+const onTripFeatures: {
+  icon: string;
+  label: string;
+  text: string;
+}[] = [
+    { icon: "/destinations/seaside-view.svg", label: "Stays:", text: "every one 4-star and up" },
     {
-      src: "/why-sairr/takencare-1.webp",
-      alt: "Sairr travellers arriving at their stay",
-      width: 765,
-      height: 938,
+      icon: "/destinations/seeting.svg",
+      label: "Transport:",
+      text: "well-maintained, never packed to the last seat",
     },
     {
-      src: "/why-sairr/takencare-2.webp",
-      alt: "Fresh meal prepared for Sairr travellers",
-      width: 669,
-      height: 822,
+      icon: "/destinations/food.svg",
+      label: "Food:",
+      text: "your dietary needs met all the way through",
     },
     {
-      src: "/why-sairr/takencare-3.webp",
-      alt: "Sairr group enjoying time together",
-      width: 1199,
-      height: 715,
+      icon: "/destinations/profile.svg",
+      label: "Sairr host:",
+      text:
+        "a trained host with you throughout, so you're never figuring it out alone",
     },
-  ] as const,
-};
+    {
+      icon: "/destinations/car.svg",
+      label: "Door-to-door:",
+      text: "taken care of from the moment you leave home until you're back",
+    },
+  ];
 
 const faqSection = {
   heading: "FAQS - Frequently Asked Questions",
@@ -83,27 +77,272 @@ export const metadata = createMetadata({
   path: "/why-sairr",
 });
 
+function SectionBullet() {
+  return (
+    <span
+      className="mt-2 size-2.5 shrink-0 rounded-full bg-[#C8A867]"
+      aria-hidden
+    />
+  );
+}
+
 export default function WhySairrPage() {
   return (
-    <>
+    <main className="bg-[#FDFBF2]">
+      {/* Banner — fill + aspect ratio (see contact & thank-you pages) */}
       <section
         data-header-hero
-        className="relative overflow-hidden"
+        className="relative flex min-h-[440px] items-center justify-center overflow-hidden sm:min-h-[500px] md:min-h-[580px] lg:min-h-[620px] lg:aspect-[1512/572]"
       >
         <Image
-          src="/why-sairr/HeroSectionImg1.webp"
-          alt="European city"
-          width={4536}
-          height={1799}
+          src="/why-sairr/why-sairr-banner.webp"
+          alt="Scenic European town by the water"
+          fill
           priority
           sizes="100vw"
-          className="h-auto w-full"
+          className="object-cover object-center"
         />
+        <div className="absolute inset-0 bg-black/40" aria-hidden />
+        <div className="relative z-10 mx-auto max-w-5xl -translate-y-4 px-4 pb-6 pt-12 text-center text-white sm:-translate-y-6 sm:px-6 sm:pb-8 sm:pt-14 md:-translate-y-8 md:pb-8 md:pt-16 lg:-translate-y-10 lg:pb-8">
+          <FadeIn>
+            <h1 className="font-heading text-2xl font-semibold leading-tight text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.7)] sm:text-4xl md:text-5xl lg:text-[3.125rem] lg:leading-[1.18]">
+              The desire to explore doesn&apos;t change.
+              <br />
+              What you want from travel does.
+            </h1>
+          </FadeIn>
+        </div>
       </section>
 
-      <WhySairrIntroSection {...introSection} />
-      <WhySairrTravelSection {...travelSection} />
-      <WhySairrCareSection {...careSection} />
+      {/* Overlapping intro card — positioned like thank-you & contact pages */}
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 lg:pb-20">
+        <div className="-mt-20 overflow-hidden rounded-lg border border-[#E9DFC8]/90 bg-white p-5 shadow-[0_10px_35px_rgba(0,0,0,0.06)] sm:-mt-24 sm:p-6 md:-mt-32 md:p-7 lg:-mt-28 lg:py-2 lg:pl-6 lg:pr-2">
+          <FadeIn>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-14">
+              <div className="text-sm leading-relaxed text-[#5D5D5D] sm:text-base lg:text-[1.25rem] lg:leading-[1.5]">
+                <p>
+                  <span className="font-semibold italic text-[#0E5E6F]">
+                    Sairr designs travel for life after 50
+                  </span>
+                  , around the person taking it: your pace and preferences, the
+                  experiences you want, and the ones you&apos;d rather skip.
+                  Every detail is worked out, from the first call to the flight
+                  back home.
+                </p>
+                <p className="mt-4 font-bold text-[#0E5E6F] sm:mt-5">
+                  So there&apos;s less to plan, and more to actually be in.
+                </p>
+              </div>
+              <Image
+                src="/why-sairr/Tropical-Beach-Stroll.webp"
+                alt="Friends strolling along a tropical beach"
+                width={410}
+                height={213.07}
+                className="w-full max-w-[410px] md:w-[410px] h-auto md:h-[213.07px] object-cover rounded-lg shrink-0"
+              />
+            </div>
+          </FadeIn>
+        </div>
+      </div>
+
+      {/* What gets in the way */}
+      <section className="bg-[#FDFBF2] pt-12 pb-16 sm:pb-20 lg:pb-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <div className="relative rounded-lg border border-[#C8A867] bg-[#FDFBF2] px-5 pb-8 pt-14 sm:px-8 sm:pb-10 sm:pt-16 md:pt-24 lg:pt-28">
+              <div
+                className="absolute left-1/2 top-0 flex max-w-[calc(100%-2rem)] -translate-x-1/2 sm:-translate-x-2/3 -translate-y-1/2 items-center gap-2 sm:gap-3 bg-[#FDFBF2] px-2 sm:px-3 sm:max-w-none md:gap-4 md:px-5"
+              >
+                <Image
+                  src="/why-sairr/confused-couple.svg"
+                  alt=""
+                  width={98.93}
+                  height={105.06}
+                  className="w-14 sm:w-20 md:w-[98.93px] h-auto md:h-[105.06px] shrink-0"
+                  aria-hidden
+                />
+                <h2 className="font-heading text-lg font-semibold text-black sm:text-2xl lg:text-[2.25rem]">
+                  What gets in the way
+                </h2>
+              </div>
+              <div className="mt-2 sm:mt-0 grid gap-8 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-16">
+                {whatGetsInTheWay.map((item) => (
+                  <div key={item.title} className="flex gap-4 sm:gap-5">
+                    <Image
+                      src={item.icon}
+                      alt=""
+                      width={62}
+                      height={57}
+                      className="w-12 h-auto sm:w-[62px] sm:h-[57px] shrink-0 object-contain"
+                      aria-hidden
+                    />
+                    <div>
+                      <p className="text-base font-semibold text-[#1b1d1f] sm:text-2xl">
+                        {item.title}
+                      </p>
+                      <p className="mt-1 text-sm leading-snug text-[#5D5D5D] sm:text-base">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Gap Sairr fills */}
+      <section className="relative overflow-hidden bg-[#0E5E6F] py-14 sm:py-14 lg:py-10">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14">
+          <FadeIn>
+            <div className="text-center lg:text-left">
+              <h2 className="font-heading text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-[2.313rem]">
+                There should be another way.
+                <br />
+                Travel you can count on.
+              </h2>
+              <div className="mx-auto mt-6 sm:mt-8 h-[1px] w-20 bg-[#C8A867] lg:mx-0" />
+              <p className="mt-6 sm:mt-8 text-lg font-medium text-[#C8A867] sm:text-3xl">
+                That&apos;s the gap Sairr exists to fill.
+              </p>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <Image
+              src="/why-sairr/group-dinner-beach.webp"
+              alt="Group enjoying dinner by the beach at sunset"
+              width={354.79}
+              height={280}
+              className="object-cover w-full max-w-[354.79px] h-auto lg:w-[354.79px] lg:h-[280px]"
+            />
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* How Sairr works */}
+      <section className="bg-[#FDFBF2] pt-14 sm:pt-16 lg:pt-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="font-heading text-3xl font-semibold text-black sm:text-4xl">
+              How sairr works
+            </h2>
+            <p className="mx-auto mt-2 max-w-2xl text-base text-[#5D5D5D] sm:text-xl">
+              Thought through before you leave. Taken care of until you&apos;re
+              home.
+            </p>
+          </div>
+
+          <div className="mt-10 sm:mt-12">
+            <FadeIn>
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 lg:gap-40">
+                <div className="flex gap-3 sm:gap-4">
+                  <SectionBullet />
+                  <div className="text-sm leading-relaxed text-[#5D5D5D] sm:text-base lg:text-lg">
+                    <h3 className="text-lg font-semibold text-[#1b1d1f] sm:text-2xl">
+                      Before you book
+                    </h3>
+                    <p className="mt-4 text-sm md:text-base">
+                      Before a trip opens for booking, every route, stay, transfer and itinerary is extensively vetted on the ground for pace, hygiene, food, amenities, location, timing, all of it.
+                    </p>
+                    <p className="mt-4 text-sm md:text-base">
+                      Each trip is built as a whole, around how the days should feel. We plan for what&apos;s right, not what&apos;s easiest to sell.
+                    </p>
+                    <p className="mt-4 text-sm md:text-base">
+                      You&apos;ll know who&apos;s coming along, what it costs and what&apos;s included.{" "}
+                      <span className="font-medium italic text-[#0E5E6F]">
+                        Nothing hidden.
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <Image
+                  src="/why-sairr/cab-service.webp"
+                  alt="Sairr travellers greeted at the airport"
+                  width={237}
+                  height={205.83}
+                  className="object-cover w-[200px] sm:w-[237px] h-auto lg:w-[237px] lg:h-[205.83px] shrink-0"
+                />
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.05}>
+              <div className="mt-10 sm:mt-12 border-t-[1px] border-[#C8A867] py-10 sm:py-12 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 lg:gap-40">
+                <div className="flex gap-3 sm:gap-4">
+                  <SectionBullet />
+                  <div className="text-sm leading-relaxed text-[#5D5D5D] sm:text-base lg:text-lg">
+                    <h3 className="text-lg font-semibold text-[#1b1d1f] sm:text-xl">
+                      On the trip
+                    </h3>
+                    <p className="mt-2 text-sm md:text-base">
+                      We&apos;d rather go deep on a few hand-picked places than
+                      wide across many.
+                    </p>
+                    <ul className="mt-4 space-y-3">
+                      {onTripFeatures.map(({ icon, label, text }) => (
+                        <li key={label} className="flex gap-3 md:gap-4">
+                          <Image
+                            src={icon}
+                            alt=""
+                            width={20}
+                            height={20}
+                            className="mt-0.5 size-6 shrink-0 text-[#5D5D5D]"
+                          />
+                          <span className="text-sm md:text-base">
+                            <span className="font-semibold text-[#0E5E6F]">
+                              {label}
+                            </span>{" "}
+                            {text}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <Image
+                  src="/why-sairr/hotel-stay.webp"
+                  alt="Sairr group with their host at a resort"
+                  width={401.65}
+                  height={262.12}
+                  className="object-cover w-full max-w-[401.65px] h-auto lg:w-[401.65px] lg:h-[262.12px] shrink-0"
+                />
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.1}>
+              <div className="relative border-t-[1px] border-[#C8A867] py-10 sm:py-12 flex flex-col md:flex-row items-start justify-between gap-8 md:gap-16 lg:gap-40">
+                <Image
+                  src="/why-sairr/two-birds.svg"
+                  alt=""
+                  width={103.79}
+                  height={34}
+                  className="w-[103.79px] h-auto pointer-events-none absolute bottom-4 left-0 hidden opacity-80 sm:block lg:bottom-8"
+                  aria-hidden
+                />
+                <div className="flex gap-3 sm:gap-4">
+                  <SectionBullet />
+                  <div className="text-sm leading-relaxed text-[#5D5D5D] sm:text-base lg:text-lg">
+                    <h3 className="text-lg font-semibold text-[#1b1d1f] sm:text-xl">
+                      For your family
+                    </h3>
+                    <p className="mt-4">
+                      Daily updates on how the trip is going, and a human point
+                      of contact at Sairr if your family needs to reach us.
+                    </p>
+                  </div>
+                </div>
+                <Image
+                  src="/why-sairr/update-for-family.webp"
+                  alt="Family member receiving a trip update on their phone"
+                  width={244.84}
+                  height={226.78}
+                  className="w-[200px] sm:w-[244.84px] h-auto lg:w-[244.84px] lg:h-[226.78px] shrink-0 self-center md:self-start"
+                />
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
 
       <PuriFaqs {...faqSection} />
 
@@ -112,6 +351,6 @@ export default function WhySairrPage() {
         content={ctaContent}
         hrefTxt="Hi, I'd like to know more about travelling with Sairr."
       />
-    </>
+    </main>
   );
 }
