@@ -67,7 +67,7 @@ function GalleryTile({
       />
       {moreImagesCount ? (
         <span className="absolute inset-0 flex items-end justify-center pb-6">
-          <span className="cursor-pointer flex items-center gap-2 rounded px-4 py-2 text-sm font-medium text-charcoal" style={{ backgroundColor: "#FFFFFFE3" }}>
+          <span className="cursor-pointer flex items-center gap-2 rounded p-2 text-sm font-medium text-charcoal" style={{ backgroundColor: "#FFFFFFE3" }}>
             <Image
               src="/destinations/photo.svg"
               alt=""

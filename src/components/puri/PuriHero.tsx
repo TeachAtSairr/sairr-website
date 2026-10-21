@@ -156,7 +156,7 @@ export function PuriHero({ sectionData, className }: PuriHeroProps) {
 
 export function PuriHeroDetails({ sectionData, className }: PuriHeroProps) {
   return (
-    <div className={cn("w-full pt-6 pb-2 lg:pt-8", className)}>
+    <div className={cn("w-full pt-6 pb-6 lg:pb-2 lg:pt-8", className)}>
       <p className=" text-xs leading-relaxed text-black sm:text-sm">
         {sectionData.body}
       </p>

@@ -60,7 +60,7 @@ export function SocialFollow({ className }: SocialFollowProps) {
   return (
     <section
       className={cn(
-        "mx-4 mb-10 rounded-lg bg-[#E9DFC8]/50 px-5 py-6 sm:mx-6 sm:px-8 md:py-7 lg:mx-auto lg:mb-16 lg:max-w-6xl lg:px-12",
+        "mx-4 mb-10 rounded-lg bg-[#F5F0E1] px-5 py-6 sm:mx-6 sm:px-8 md:py-7 lg:mx-auto lg:mb-16 lg:max-w-6xl lg:px-12",
         className,
       )}
     >

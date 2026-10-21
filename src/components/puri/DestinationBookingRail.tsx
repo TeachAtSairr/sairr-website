@@ -65,7 +65,8 @@ export function DestinationBookingRail({
   const railTalkCta = ctaClass(ctaPage, "rail", "talk-to-us");
 
   return (
-    <div className="flex flex-col gap-6">
+    <div id="pricing-dates" className="scroll-mt-16 flex flex-col gap-6">
+      <h2 className="block sm:hidden text-3xl font-semibold text-black text-center">Pricing & Dates</h2>
       <article className="rounded-lg border-[0.5px] border-solid border-[#C8A867] bg-white p-5 shadow-[0_8px_30px_rgba(27,29,31,0.06)] overflow-hidden">
         <p className="text-xl font-semibold text-[#0E5E6F]">{title}</p>
         <div className="-mx-5 mt-2 border-b border-charcoal/10 px-5 pb-3">
@@ -121,7 +122,7 @@ export function DestinationBookingRail({
           </button>
         </div>
 
-        <div className={`mt-4 text-[10px] text-black flex flex-row gap-8 bg-[#F9F6F6] py-2 -mx-5 px-5`}>
+        <div className={`mt-4 text-[10px] text-black flex flex-row gap-4 sm:gap-8 bg-[#F9F6F6] py-2 -mx-5 px-5`}>
           <div>• Based on Delhi/NCR as origin</div>
           <div>• Reserve your spot @ ₹0</div>
         </div>

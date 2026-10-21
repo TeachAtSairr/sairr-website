@@ -58,7 +58,7 @@ export function FaqAccordionSection({
         />
 
         <FadeIn delay={0.1}>
-          <Accordion className="mt-8 gap-4 sm:mt-10">
+          <Accordion className="mt-4 gap-4 sm:mt-10">
             {faqData.map((faq, index) => (
               <AccordionItem
                 key={faq.question}

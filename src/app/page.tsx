@@ -25,7 +25,7 @@ export default function HomePage() {
       <WorkBehindTheEaseSection />
       <RealTravellersSection />
       <TripGallerySection
-        heading="The moments that stay with you"
+        heading="The moments that stay"
         para="A glimpse into life on a Sairr journey."
         images={galleryImages}
       />

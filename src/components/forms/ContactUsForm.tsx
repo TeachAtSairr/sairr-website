@@ -70,7 +70,7 @@ export function ContactUsForm({
     ? "h-8 md:h-10 rounded-[4px] md:rounded-[8px] border-0 bg-white px-2 md:px-4 text-base text-charcoal shadow-none transition-colors placeholder:text-[11px] md:placeholder:text-sm placeholder:text-[#5d5d5d]/70 focus-visible:ring-2 focus-visible:ring-white/30 md:text-sm"
     : fieldClassName;
   const textareas = isTeal
-    ? "min-h-20 rounded-[4px] md:rounded-[8px] border-0 bg-white px-2 md:px-4 py-3 text-base text-charcoal shadow-none transition-colors placeholder:text-[11px] md:placeholder:text-sm placeholder:text-[#5d5d5d]/70 focus-visible:ring-2 focus-visible:ring-white/30 md:text-sm"
+    ? "min-h-16 rounded-[4px] md:rounded-[8px] border-0 bg-white px-2 md:px-4 py-3 text-base text-charcoal shadow-none transition-colors placeholder:text-[11px] md:placeholder:text-sm placeholder:text-[#5d5d5d]/70 focus-visible:ring-2 focus-visible:ring-white/30 md:text-sm"
     : textareaClassName;
   const optionalMuted = isTeal
     ? "normal-case tracking-normal text-white/70"
@@ -134,7 +134,7 @@ export function ContactUsForm({
       ) : (
         <div className="space-y-6">
           <div className="grid gap-6 sm:grid-cols-2">
-            <div className="space-y-2">
+            <div className="space-y-1">
               <Label htmlFor="cu-travellers" className={labels}>
                 Number of travellers
               </Label>
@@ -147,7 +147,7 @@ export function ContactUsForm({
                 {...register("numberOfTravellers", { valueAsNumber: true })}
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1">
               <Label htmlFor="cu-preferred-date" className={labels}>
                 Preferred date
               </Label>
@@ -159,7 +159,7 @@ export function ContactUsForm({
               />
             </div>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Label htmlFor="cu-how-hear" className={labels}>
               How did you hear about us?
             </Label>
@@ -187,7 +187,7 @@ export function ContactUsForm({
 
       {/* Name + Phone */}
       <div className="grid gap-3 md:gap-6 grid-cols-2">
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label htmlFor="cu-name" className={labels}>
             Name
           </Label>
@@ -203,7 +203,7 @@ export function ContactUsForm({
           )}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label htmlFor="cu-phone" className={labels}>
             Phone number
           </Label>
@@ -230,7 +230,7 @@ export function ContactUsForm({
       </div>
 
       {/* Email (optional) */}
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="cu-email" className={labels}>
           Email{" "}
           <span className={optionalMuted}>
@@ -252,7 +252,7 @@ export function ContactUsForm({
       </div>
 
       {/* Topic */}
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="cu-topic" className={labels}>
           What is this about?
         </Label>
@@ -285,7 +285,7 @@ export function ContactUsForm({
       </div>
 
       {/* Message (optional) */}
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor="cu-message" className={labels}>
           Anything else you&apos;d like to tell us?{" "}
           <span className={optionalMuted}>

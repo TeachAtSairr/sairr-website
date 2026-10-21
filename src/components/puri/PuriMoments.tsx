@@ -58,15 +58,15 @@ export function PuriMoments({
           />
         </FadeIn>
 
-        <div className="mt-8 sm:mt-8">
+        <div className="mt-4 sm:mt-8">
           <CarouselSection
             trackWrapperClassName={cn(
-              "bg-[#E9DFC8] py-6 sm:py-8 overflow-hidden",
+              "overflow-hidden bg-[#E9DFC8] py-6 sm:py-8",
               flush
-                ? "-mx-4 sm:-mx-6 lg:mx-0 pl-5 pr-0"
-                : "-mr-4 pl-4 sm:-mr-6 sm:pl-6 lg:-mr-8 lg:pl-8",
+                ? "-mx-4 pl-4 pr-0 sm:-mx-6 lg:mx-0"
+                : "-mx-4 pl-4 pr-0 sm:-mx-6 lg:-mx-8 lg:pl-8 lg:pr-0",
             )}
-            slideClassName="py-2 last:mr-5"
+            slideClassName="py-2 last:mr-4 sm:last:mr-6 lg:last:mr-8"
             gap={{ mobile: 12, tablet: 20, desktop: 20 }}
             fixedSlideWidthLg={MOMENT_CARD_WIDTH_PX}
             items={cards}
@@ -82,7 +82,7 @@ export function PuriMoments({
                 <MomentCard moment={item} />
               </CardRevealCarouselItem>
             )}
-            slidesPerView={{ mobile: 1.45, tablet: 2, desktop: 3 }}
+            slidesPerView={{ mobile: 1.15, tablet: 2, desktop: 3 }}
             ariaLabel="Moments that make Puri"
             autoplay={false}
             showDots
