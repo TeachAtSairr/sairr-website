@@ -74,14 +74,14 @@ export function TripGallerySection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.35, duration: 0.6 }}
-              className="mt-2 sm:mt-0 text-base leading-relaxed text-[#5d5d5d] sm:text-xl"
+              className="mt-0 text-base leading-relaxed text-[#5d5d5d] sm:text-xl"
             >
               {para}
             </motion.p>
           </div>
         </FadeIn>
 
-        <TripGalleryGrid images={images} className="mt-8 lg:mt-10" />
+        <TripGalleryGrid images={images} className="mt-4 lg:mt-10" />
       </div>
     </section>
   );

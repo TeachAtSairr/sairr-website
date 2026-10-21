@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Testimonial } from "@/data/testimonials";
 import { TestimonialCard } from "@/components/shared/TestimonialCard";
+import { cn } from "@/lib/utils";
 
 const SLIDE_GAP_MOBILE_PX = 30;
 const SLIDE_GAP_DESKTOP_PX = 40;
@@ -25,6 +26,7 @@ export function TestimonialCarousel({
   const carouselRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
+  const [activeDotIndex, setActiveDotIndex] = useState(0);
 
   function updateNavigationState() {
     const carousel = carouselRef.current;
@@ -34,6 +36,36 @@ export function TestimonialCarousel({
     setAtEnd(
       carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 1,
     );
+
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+    if (maxScroll > 0 && testimonials.length > 1) {
+      setActiveDotIndex(
+        Math.min(
+          testimonials.length - 1,
+          Math.max(
+            0,
+            Math.round(
+              (carousel.scrollLeft / maxScroll) * (testimonials.length - 1),
+            ),
+          ),
+        ),
+      );
+    } else {
+      setActiveDotIndex(0);
+    }
+  }
+
+  function scrollToDot(dotIndex: number) {
+    const carousel = carouselRef.current;
+    if (!carousel || testimonials.length <= 1) return;
+
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+    const target =
+      testimonials.length > 1
+        ? (dotIndex / (testimonials.length - 1)) * maxScroll
+        : 0;
+
+    carousel.scrollTo({ left: target, behavior: "smooth" });
   }
 
   function scroll(direction: "previous" | "next") {
@@ -78,25 +110,44 @@ export function TestimonialCarousel({
         ))}
       </div>
 
-      <div className="mt-4 flex items-center justify-center gap-3">
-        <button
-          type="button"
-          aria-label="Previous testimonial"
-          disabled={atStart}
-          onClick={() => scroll("previous")}
-          className="flex size-11 cursor-pointer items-center justify-center rounded border border-charcoal/15 bg-white text-charcoal transition-colors hover:border-charcoal/30 disabled:cursor-not-allowed disabled:opacity-35"
-        >
-          <ChevronLeft className="size-5" />
-        </button>
-        <button
-          type="button"
-          aria-label="Next testimonial"
-          disabled={atEnd}
-          onClick={() => scroll("next")}
-          className="flex size-11 cursor-pointer items-center justify-center rounded border border-charcoal/15 bg-white text-charcoal transition-colors hover:border-charcoal/30 disabled:cursor-not-allowed disabled:opacity-35"
-        >
-          <ChevronRight className="size-5" />
-        </button>
+      <div className="mt-4 flex items-center justify-center">
+        <div className="flex items-center gap-2 md:hidden">
+          {testimonials.map((testimonial, i) => (
+            <button
+              key={testimonial.id}
+              type="button"
+              onClick={() => scrollToDot(i)}
+              aria-label={`Go to testimonial ${i + 1}`}
+              className={cn(
+                "size-2 rounded-full transition-all",
+                activeDotIndex === i
+                  ? "bg-[#C8A867]"
+                  : "bg-[#E5DECE] hover:bg-[#C8A867]/60",
+              )}
+            />
+          ))}
+        </div>
+
+        <div className="hidden items-center justify-center gap-3 md:flex">
+          <button
+            type="button"
+            aria-label="Previous testimonial"
+            disabled={atStart}
+            onClick={() => scroll("previous")}
+            className="flex size-8 cursor-pointer items-center justify-center rounded border border-charcoal/15 bg-white text-charcoal transition-colors hover:border-charcoal/30 disabled:cursor-not-allowed disabled:opacity-35"
+          >
+            <ChevronLeft className="size-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Next testimonial"
+            disabled={atEnd}
+            onClick={() => scroll("next")}
+            className="flex size-8 cursor-pointer items-center justify-center rounded border border-charcoal/15 bg-white text-charcoal transition-colors hover:border-charcoal/30 disabled:cursor-not-allowed disabled:opacity-35"
+          >
+            <ChevronRight className="size-5" />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -194,7 +194,7 @@ export default function WhySairrPage() {
 
       {/* Gap Sairr fills */}
       <section className="relative overflow-hidden bg-[#0E5E6F] py-14 sm:py-14 lg:py-10">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-20 lg:gap-14">
           <FadeIn>
             <div className="text-center lg:text-left">
               <h2 className="font-heading text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-[2.313rem]">

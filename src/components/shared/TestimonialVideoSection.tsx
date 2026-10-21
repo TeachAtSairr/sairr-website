@@ -43,7 +43,7 @@ export function TestimonialVideoSection({
           descriptionClassName="sm:text-lg"
         />
 
-        <FadeIn delay={0.1} className="mt-8 sm:mt-10 lg:mt-8">
+        <FadeIn delay={0.1} className="mt-4 sm:mt-10 lg:mt-8">
           <LazyYouTubeEmbed
             videoUrl={videoUrl}
             title={resolvedTitle}

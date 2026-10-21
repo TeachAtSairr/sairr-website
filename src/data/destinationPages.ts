@@ -65,7 +65,7 @@ const puriPage: DestinationPageContent = {
   words: puriWordsSectionData,
   faqs: puriFaqsSectionData,
   gallery: {
-    heading: "A few frames from the journey",
+    heading: "The journey, in frames",
     para: "",
     images: puriGalleryImages,
   },

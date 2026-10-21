@@ -100,14 +100,14 @@ export function JourneysSection() {
   }
 
   return (
-    <section id="destinations" className="relative scroll-mt-24 bg-[#FDFBF2]">
+    <section id="destinations" className="relative scroll-mt-16 bg-[#FDFBF2]">
       <div className="mx-auto max-w-7xl px-4 pt-0 sm:px-6 md:px-0 lg:pt-2">
         <FadeIn>
           <div className="mx-auto max-w-4xl text-center">
             <TextReveal
               as="h2"
               text="Journeys to look forward to"
-              className="font-heading text-[28px] font-semibold tracking-tight text-black sm:text-4xl lg:leading-tight"
+              className="font-heading text-[28px] leading-[1.1] font-semibold tracking-tight text-black sm:text-4xl lg:leading-tight"
             />
             <motion.p
               initial={{ opacity: 0, y: 16 }}
@@ -125,7 +125,7 @@ export function JourneysSection() {
 
       <div className="relative w-full">
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full aspect-[786/708] md:aspect-[1514/553]"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full aspect-[393/354] md:aspect-[1514/553]"
           aria-hidden
         >
           <Image
@@ -146,8 +146,9 @@ export function JourneysSection() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 md:px-0">
           <CarouselSection
-            className="mt-2 ml-4 mr-4 lg:ml-0 lg:mr-0 lg:mt-6"
-            slideClassName="py-6"
+            className="mt-2 lg:mt-6"
+            trackWrapperClassName="-mx-4 pl-4 pr-0 sm:-mx-6 md:mx-0 md:pl-0 md:pr-0"
+            slideClassName="py-6 last:mr-4 sm:last:mr-6 md:last:mr-0"
             items={journeys}
             getKey={(journey) => journey.slug}
             renderItem={(journey, index) => (

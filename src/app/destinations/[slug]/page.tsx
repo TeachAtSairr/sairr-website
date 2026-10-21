@@ -109,7 +109,7 @@ export default async function DestinationPage({ params }: Props) {
                   heading={destination.itineraryHeading}
                   carouselData={destination.itinerary}
                 />
-                <div className="py-8 lg:hidden">{bookingRail}</div>
+                <div className="pb-8 lg:hidden">{bookingRail}</div>
                 <GroupTravelSection
                   flush
                   heading="Traveling with your own group?"
