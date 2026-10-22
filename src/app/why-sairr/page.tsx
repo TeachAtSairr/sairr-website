@@ -103,7 +103,7 @@ export default function WhySairrPage() {
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-black/40" aria-hidden />
-        <div className="relative z-10 mx-auto max-w-5xl -translate-y-4 px-4 pb-6 pt-12 text-center text-white sm:-translate-y-6 sm:px-6 sm:pb-8 sm:pt-14 md:-translate-y-8 md:pb-8 md:pt-16 lg:-translate-y-10 lg:pb-8">
+        <div className="relative z-10 mx-auto max-w-5xl -translate-y-4 px-4 pb-2 pt-32 text-center text-white sm:-translate-y-6 sm:px-6 sm:pb-8 sm:pt-14 md:-translate-y-8 md:pb-8 md:pt-16 lg:-translate-y-10 lg:pb-8">
           <FadeIn>
             <h1 className="font-heading text-2xl font-semibold leading-tight text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.7)] sm:text-4xl md:text-5xl lg:text-[3.125rem] lg:leading-[1.18]">
               The desire to explore doesn&apos;t change.
