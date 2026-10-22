@@ -25,19 +25,21 @@ function SocialLinkItem({
   href,
   label,
   icon,
-  iconClassName = "size-11",
+  iconClassName,
+  labelClassName,
 }: {
   href: string;
   label: string;
   icon: string;
-  iconClassName?: string;
+  iconClassName: string;
+  labelClassName: string;
 }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex flex-col items-center gap-1.5 text-center transition-opacity hover:opacity-80"
+      className="flex flex-col items-center gap-0.5 text-center transition-opacity hover:opacity-80 sm:gap-1.5"
     >
       <Image
         src={icon}
@@ -47,7 +49,7 @@ function SocialLinkItem({
         aria-hidden
         className={iconClassName}
       />
-      <span className="text-xs text-[#5d5d5d] sm:text-sm">{label}</span>
+      <span className={labelClassName}>{label}</span>
     </a>
   );
 }
@@ -60,51 +62,36 @@ export function SocialFollow({ className }: SocialFollowProps) {
   return (
     <section
       className={cn(
-        "mx-4 mb-10 rounded-lg bg-[#F5F0E1] px-5 py-6 sm:mx-6 sm:px-8 md:py-7 lg:mx-auto lg:mb-16 lg:max-w-6xl lg:px-12",
+        "mx-3 mb-10 rounded-lg bg-[#F5F0E1] px-3 py-4 sm:mx-6 sm:px-8 sm:py-6 md:py-7 lg:mx-auto lg:mb-16 lg:max-w-6xl lg:px-12",
         className,
       )}
     >
       <FadeIn>
-        <div className="text-center md:hidden">
-          <h2 className="font-heading text-3xl font-semibold text-[#1a1a1a]">
-            Follow along
-          </h2>
-          <p className="mt-1.5 text-sm text-[#5d5d5d]">
-            See what Sairr is all about.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-10">
-            {socialLinks.map((link) => (
-              <SocialLinkItem
-                key={link.href}
-                {...link}
-                iconClassName="size-12"
-              />
-            ))}
-          </div>
-        </div>
-
         <div
-          className="hidden md:grid md:grid-cols-[minmax(0,1fr)_1px_minmax(0,2fr)] md:items-center md:gap-x-10 lg:gap-x-14"
+          className="grid grid-cols-[minmax(0,1fr)_1px_minmax(0,1.35fr)] items-center gap-x-3 sm:grid-cols-[minmax(0,1fr)_1px_minmax(0,2fr)] sm:gap-x-6 md:gap-x-10 lg:gap-x-14"
         >
-          <div className="min-w-0 pr-2 lg:pr-4">
-            <h2 className="font-heading text-[1.75rem] font-semibold leading-tight text-[#1a1a1a] lg:text-4xl">
+          <div className="min-w-0 pr-1 sm:pr-2 lg:pr-4">
+            <h2
+              className="font-heading text-lg font-semibold leading-tight text-[#1a1a1a] sm:text-[1.75rem] lg:text-4xl"
+            >
               Follow along
             </h2>
-            <p className="mt-1 text-sm text-[#5d5d5d] lg:text-base">
+            <p className="mt-0.5 text-[10px] leading-snug text-[#5d5d5d] sm:mt-1 sm:text-sm lg:text-base">
               See what Sairr is all about.
             </p>
           </div>
           <div className="relative w-px shrink-0 self-center" aria-hidden>
             <div
-              className="absolute left-0 top-1/2 h-14 w-px -translate-y-1/2 bg-[#EC575E] lg:h-24"
+              className="absolute left-0 top-1/2 h-12 w-px -translate-y-1/2 bg-[#EC575E] sm:h-14 lg:h-24"
             />
           </div>
-          <div className="grid grid-cols-3 items-center justify-items-center">
+          <div className="grid grid-cols-3 items-center justify-items-center gap-1 sm:gap-0">
             {socialLinks.map((link) => (
               <SocialLinkItem
                 key={link.href}
                 {...link}
-                iconClassName="size-12 lg:size-14"
+                iconClassName="size-8 sm:size-12 lg:size-14"
+                labelClassName="text-[9px] leading-tight text-[#5d5d5d] sm:text-sm"
               />
             ))}
           </div>

@@ -193,28 +193,37 @@ export default function WhySairrPage() {
       </section>
 
       {/* Gap Sairr fills */}
-      <section className="relative overflow-hidden bg-[#0E5E6F] py-14 sm:py-14 lg:py-10">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-20 lg:gap-14">
+      <section className="relative overflow-hidden bg-[#0E5E6F] py-8 sm:py-14 lg:py-10">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-1">
           <FadeIn>
-            <div className="text-center lg:text-left">
+            <div className="text-left">
               <h2 className="font-heading text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-[2.313rem]">
                 There should be another way.
                 <br />
                 Travel you can count on.
               </h2>
-              <div className="mx-auto mt-6 sm:mt-8 h-[1px] w-20 bg-[#C8A867] lg:mx-0" />
-              <p className="mt-6 sm:mt-8 text-lg font-medium text-[#C8A867] sm:text-3xl">
+              <div className="mt-6 sm:mt-8 h-[1px] w-20 bg-[#C8A867] lg:mx-0" />
+              <p className="mt-6 sm:mt-8 text-lg font-medium text-[#C8A867] sm:text-[1.75rem]">
                 That&apos;s the gap Sairr exists to fill.
               </p>
             </div>
           </FadeIn>
-          <FadeIn delay={0.1}>
+          <FadeIn delay={0.1} className="w-full lg:w-[min(100%,36rem)] lg:shrink-0">
+            <Image
+              src="/why-sairr/group-dinner-beach-mob.webp"
+              alt="Group enjoying dinner by the beach at sunset"
+              width={1070}
+              height={421}
+              sizes="100vw"
+              className="h-auto w-full lg:hidden"
+            />
             <Image
               src="/why-sairr/group-dinner-beach.webp"
               alt="Group enjoying dinner by the beach at sunset"
-              width={354.79}
-              height={280}
-              className="object-cover w-full max-w-[354.79px] h-auto lg:w-[354.79px] lg:h-[280px]"
+              width={2065}
+              height={840}
+              sizes="(min-width: 1024px) 36rem, 0px"
+              className="hidden h-auto w-full lg:block"
             />
           </FadeIn>
         </div>
