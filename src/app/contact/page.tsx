@@ -170,7 +170,7 @@ export default function ContactPage() {
                   we&apos;re back.
                 </p>
 
-                <div className="mt-6 lg:mt-auto lg:pt-8 flex flex-row items-center gap-1">
+                <div className="mt-6 lg:mt-auto lg:pt-8 flex flex-row items-start sm:items-center gap-6 sm:gap-1">
                   <div className="text-sm font-semibold text-[#1a1a1a] flex flex-row items-center gap-1">
                     <Image src="/contact/location.svg" alt="Location" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5" /> <span>Address: </span>
                   </div>

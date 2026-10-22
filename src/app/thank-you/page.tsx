@@ -44,7 +44,7 @@ export default function ThankYouPage() {
         </div>
       </section>
 
-      <div className="relative z-10 mx-3 md:mx-auto max-w-6xl pb-10 lg:pb-12">
+      <div className="relative z-10 mx-3 md:mx-auto max-w-6xl pb-6 lg:pb-12">
         <div
           className="-mt-20 overflow-hidden rounded-lg bg-white shadow-[0_20px_50px_rgba(0,0,0,0.08)] sm:-mt-24 lg:-mt-44"
         >
@@ -127,19 +127,19 @@ export default function ThankYouPage() {
                   </a>
                 </div>
 
-                <div className="mt-4 sm:mt-8 md:mt-10 flex items-center gap-4 pt-10 lg:mt-auto">
+                <div className="mt-2 sm:mt-8 md:mt-10 flex items-center gap-4 pt-10 lg:mt-auto">
                   <Image
                     src="/thank-card-img.webp"
                     alt=""
                     width={107}
                     height={78}
-                    className="h-[78px] w-[107px] shrink-0 rounded-md object-cover"
+                    className="h-[70.2px] w-[96.3px] md:h-[78px] md:w-[107px] shrink-0 rounded-md object-cover"
                   />
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-heading text-lg font-semibold text-[#0E5E6F] sm:text-xl">
+                    <h3 className="font-heading text-[0.938rem] font-semibold text-[#0E5E6F] sm:text-xl">
                       Planning with family or friends?
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-black sm:text-[15px]">
+                    <p className="mt-2 text-xs leading-relaxed text-black sm:text-[15px]">
                       We also offer private journeys, tailored to your group.
                       Just let us know.
                     </p>
