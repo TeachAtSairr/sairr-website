@@ -80,7 +80,7 @@ export const whySairrFaqs: Faq[] = [
   {
     question: "What is it like travelling with a group of people I don't know?",
     answer:
-      "You may not know anyone when the trip begins. But shared experiences, meals and a few good conversations have a way of bringing people closer. Strangers often become companions, and sometimes, people you'd love to travel with again.\nMost people on a Sairr group trip start out as strangers, and that's fine, because the group isn't put together randomly. Everyone's at a similar stage of life, moving at a similar pace, on a trip designed around them. A Sairr host is there with the group, holding things together, not just fellow travellers figuring it out on their own.",
+      "Most people on a Sairr group trip start out as strangers, and that's fine, because the group isn't put together randomly. Everyone's at a similar stage of life, moving at a similar pace, on a trip designed around them. A Sairr host is there with the group, holding things together, not just fellow travellers figuring it out on their own.\nYou may not know anyone when the trip begins. But shared experiences, meals and a few good conversations have a way of bringing people closer. Strangers often become companions, and sometimes, people you'd love to travel with again.",
   },
   {
     question: "How does Sairr choose which destinations to run?",

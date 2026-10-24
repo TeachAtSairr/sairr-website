@@ -226,7 +226,7 @@ export default function AboutPage() {
                       friends, families and travellers, I kept hearing
                       variations of the same concern.
                     </p>
-                    <p>
+                    <p className="text-[#0E5E6F] italic font-medium">
                       So I&apos;m building what I wished existed: a travel
                       company that brings the care, accountability and attention
                       to detail I&apos;d want for my own family.

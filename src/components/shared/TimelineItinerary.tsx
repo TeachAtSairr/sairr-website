@@ -151,7 +151,7 @@ export function TimelineItinerary({
         <FadeIn delay={0.1}>
           <Accordion
             defaultValue={defaultValue}
-            className="mt-10 sm:mt-12"
+            className="mt-10 sm:mt-10"
           >
             {carouselData.map((item, index) => {
               const value = `day-${index}`;
