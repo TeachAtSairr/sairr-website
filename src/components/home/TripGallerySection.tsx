@@ -81,7 +81,7 @@ export function TripGallerySection({
           </div>
         </FadeIn>
 
-        <TripGalleryGrid images={images} className="mt-4 lg:mt-10" />
+        <TripGalleryGrid images={images} className="mt-4 lg:mt-6" />
       </div>
     </section>
   );
