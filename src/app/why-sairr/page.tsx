@@ -107,7 +107,6 @@ export default function WhySairrPage() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-black/40" aria-hidden />
         <div className="relative z-10 mx-auto max-w-5xl -translate-y-4 px-4 pb-2 pt-32 text-center text-white sm:-translate-y-6 sm:px-6 sm:pb-8 sm:pt-14 md:-translate-y-8 md:pb-8 md:pt-16 lg:-translate-y-10 lg:pb-8">
           <FadeIn>
             <h1 className="font-heading text-2xl font-semibold leading-tight text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.7)] sm:text-4xl md:text-5xl lg:text-[3.125rem] lg:leading-[1.18]">
@@ -155,23 +154,35 @@ export default function WhySairrPage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="relative rounded-lg border border-[#C8A867] bg-[#FDFBF2] px-5 pb-8 pt-14 sm:px-8 sm:pb-10 sm:pt-16 md:pt-24 lg:pt-28">
-              <div className="absolute flex flex-col sm:flex-row left-1/2 -top-2 md:top-0 flex max-w-[calc(100%-1.5rem)] -translate-x-[58%] -translate-y-1/2 items-center gap-1.5 bg-[#FDFBF2] px-1.5 sm:max-w-none sm:-translate-x-2/3 sm:gap-3 sm:px-3 md:gap-4 md:px-5">
+              <div className="absolute left-1/2 -top-10 -translate-x-1/2 bg-[#FDFBF2] px-3 sm:hidden">
                 <Image
                   src="/why-sairr/confused-couple.svg"
                   alt=""
                   width={98.93}
                   height={105.06}
-                  className="h-auto w-12 shrink-0 sm:w-20 md:h-[105.06px] md:w-[98.93px]"
+                  className="h-auto w-15"
                   aria-hidden
                 />
-                <h2 className="font-heading text-base font-semibold leading-[1.15] text-black sm:text-2xl sm:leading-tight lg:text-[2.25rem]">
-                  What gets
-                  <br className="sm:hidden" /> in the way
+              </div>
+              <h2 className="-mt-6 text-center font-heading text-[1.75rem] font-semibold leading-[1.15] text-black sm:hidden">
+                What gets in the way
+              </h2>
+              <div className="absolute left-1/2 top-0 hidden -translate-x-2/3 -translate-y-1/2 items-center gap-3 bg-[#FDFBF2] px-3 sm:flex md:gap-4 md:px-5">
+                <Image
+                  src="/why-sairr/confused-couple.svg"
+                  alt=""
+                  width={98.93}
+                  height={105.06}
+                  className="h-auto w-20 shrink-0 md:h-[105.06px] md:w-[98.93px]"
+                  aria-hidden
+                />
+                <h2 className="font-heading text-2xl font-semibold leading-tight text-black lg:text-[2.25rem]">
+                  What gets in the way
                 </h2>
               </div>
-              <div className="mt-2 sm:mt-0 grid gap-8 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-16">
+              <div className="mt-8 sm:mt-0 grid gap-8 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-16">
                 {whatGetsInTheWay.map((item) => (
-                  <div key={item.title} className="flex gap-4 sm:gap-5">
+                  <div key={item.title} className="flex items-start sm:items-center gap-4 sm:gap-5">
                     <Image
                       src={item.icon}
                       alt=""
@@ -240,7 +251,7 @@ export default function WhySairrPage() {
       <section className="bg-[#FDFBF2] pt-12 sm:pt-16 lg:pt-[4.6rem]">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-3xl font-semibold text-black sm:text-4xl">
+            <h2 className="font-heading text-[1.75rem] font-semibold text-black sm:text-4xl">
               How Sairr works
             </h2>
             <p className="mx-auto mt-2 max-w-2xl text-base text-[#5D5D5D] sm:text-xl">
