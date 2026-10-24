@@ -8,6 +8,7 @@ import type { DateCardData } from "@/components/shared/ExperienceDatesSection";
 import type { DepartureDateRange } from "@/data/puri";
 import type { TravelDestination } from "@/lib/validations/contact";
 import { ctaClass } from "@/lib/cta";
+import { scrollToSectionId, stripHashFromUrl } from "@/lib/section-nav";
 import { cn } from "@/lib/utils";
 
 const PILL_BOOK_EARLY = "bg-[#FFF1D2]";
@@ -242,9 +243,13 @@ export function DestinationBookingRail({
         </div>
       </div>
 
-      <a
-        href="#faqs"
-        className="flex items-center gap-2 font-heading text-base font-semibold text-charcoal"
+      <button
+        type="button"
+        onClick={() => {
+          stripHashFromUrl();
+          scrollToSectionId("faqs");
+        }}
+        className="flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 font-heading text-base font-semibold text-charcoal"
       >
         <Image
           src="/destinations/faq-icon.svg"
@@ -254,7 +259,7 @@ export function DestinationBookingRail({
           className="size-5"
         />
         FAQs - frequently asked questions
-      </a>
+      </button>
     </div>
   );
 }

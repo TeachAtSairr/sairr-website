@@ -67,17 +67,15 @@ export function SocialFollow({ className }: SocialFollowProps) {
       )}
     >
       <FadeIn>
-        <div
-          className="grid grid-cols-[minmax(0,1fr)_1px_minmax(0,1.35fr)] items-center gap-x-3 sm:grid-cols-[minmax(0,1fr)_1px_minmax(0,2fr)] sm:gap-x-6 md:gap-x-10 lg:gap-x-14"
-        >
-          <div className="min-w-0 pr-1 sm:pr-2 lg:pr-4">
+        <div className="flex flex-row items-center justify-evenly">
+          <div className="min-w-0">
             <h2
-              className="font-heading text-lg font-semibold leading-tight text-[#1a1a1a] sm:text-[1.75rem] lg:text-4xl"
+              className="font-heading text-base font-semibold leading-tight text-[#1a1a1a] sm:text-[1.75rem] lg:text-4xl"
             >
               Follow along
             </h2>
-            <p className="mt-0.5 text-[10px] leading-snug text-[#5d5d5d] sm:mt-1 sm:text-sm lg:text-base">
-              See what Sairr is all about.
+            <p className="mt-0.5 text-[8px] leading-snug text-[#5d5d5d] sm:mt-1 sm:text-sm lg:text-base">
+              See what Sairr is all about
             </p>
           </div>
           <div className="relative w-px shrink-0 self-center" aria-hidden>
@@ -85,16 +83,14 @@ export function SocialFollow({ className }: SocialFollowProps) {
               className="absolute left-0 top-1/2 h-12 w-px -translate-y-1/2 bg-[#EC575E] sm:h-14 lg:h-24"
             />
           </div>
-          <div className="grid grid-cols-3 items-center justify-items-center gap-1 sm:gap-0">
-            {socialLinks.map((link) => (
-              <SocialLinkItem
-                key={link.href}
-                {...link}
-                iconClassName="size-8 sm:size-12 lg:size-14"
-                labelClassName="text-[9px] leading-tight text-[#5d5d5d] sm:text-sm"
-              />
-            ))}
-          </div>
+          {socialLinks.map((link) => (
+            <SocialLinkItem
+              key={link.href}
+              {...link}
+              iconClassName="size-8 sm:size-12 lg:size-14"
+              labelClassName="text-[9px] leading-tight text-[#5d5d5d] sm:text-sm"
+            />
+          ))}
         </div>
       </FadeIn>
     </section>

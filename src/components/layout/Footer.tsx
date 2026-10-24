@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { homeHeroHref, siteConfig, whatsappHref } from "@/data/site";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { siteConfig, whatsappHref } from "@/data/site";
+import { navigateToPageSection } from "@/lib/section-nav";
 import WhatsAppIcon from "@/public/whatsapp.svg";
 import InstagramIcon from "@/public/insta.svg";
 import LinkedInIcon from "@/public/linkedin.svg";
@@ -10,8 +15,8 @@ import YoutubeIcon from "@/public/youtube.svg";
 const CORAL = "#EC575E";
 
 const exploreLinks = [
-  { href: homeHeroHref, label: "Home" },
-  { href: "/#destinations", label: "Destinations" },
+  { href: "/", label: "Home", sectionId: "home" },
+  { href: "/", label: "Destinations", sectionId: "destinations" },
   { href: "/why-sairr", label: "Why Sairr" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
@@ -50,6 +55,16 @@ const socialLinks = [
 ] as const;
 
 export function Footer() {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const navigateToSection = useCallback(
+    (path: string, sectionId: string) => {
+      navigateToPageSection(path, sectionId, pathname, router.push);
+    },
+    [pathname, router],
+  );
+
   return (
     <footer className="bg-mist text-[#5d5d5d] border-[0.5px] border-t-[#5d5d5d]/50">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
@@ -91,13 +106,23 @@ export function Footer() {
               <div className="text-sm font-semibold text-charcoal">Explore</div>
               <ul className="mt-4 space-y-3">
                 {exploreLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-[#5d5d5d] transition-colors hover:text-charcoal"
-                    >
-                      {link.label}
-                    </Link>
+                  <li key={link.label}>
+                    {"sectionId" in link ? (
+                      <button
+                        type="button"
+                        onClick={() => navigateToSection(link.href, link.sectionId)}
+                        className="text-sm text-[#5d5d5d] transition-colors hover:text-charcoal"
+                      >
+                        {link.label}
+                      </button>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-sm text-[#5d5d5d] transition-colors hover:text-charcoal"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -127,13 +152,14 @@ export function Footer() {
           </div>
         </div>
 
-        <Link
-              href="/about#note-from-founder"
-              className="mt-8 inline-flex items-center gap-1 text-sm md:text-lg font-[400] text-brand transition-colors hover:text-[#0E5E6F]"
-            >
-              A note from founder
-              <ArrowRight className="size-4" />
-            </Link>
+        <button
+          type="button"
+          onClick={() => navigateToSection("/about", "note-from-founder")}
+          className="mt-8 inline-flex items-center gap-1 text-sm font-[400] text-brand transition-colors hover:text-[#0E5E6F] md:text-lg"
+        >
+          A note from founder
+          <ArrowRight className="size-4" />
+        </button>
 
         <div
           className="mt-2 border-t pt-4"

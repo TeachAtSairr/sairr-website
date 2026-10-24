@@ -1,0 +1,20 @@
+---
+description: In-page section navigation (no hash URLs in the address bar)
+globs:
+  - src/components/**/*.tsx
+  - src/app/**/*.tsx
+---
+
+# Section navigation
+
+Do **not** use `<Link href="#section">` or `<a href="#…">` for cross-layout jumps in the App Router.
+
+## Pattern
+
+1. Targets: **`id="…"`** + **`scroll-mt-*`** for the fixed header.
+2. **Same page:** `button` + `scrollToSectionId` / `stripHashFromUrl` from `@/lib/section-nav`.
+3. **Other page:** `navigateToPageSection(path, id, pathname, router.push)` → `sessionStorage` → **`SiteChrome`** scrolls on `pathname` change.
+
+`navLinks` may use `/#destinations` in `site.ts`; Header maps them via `getSectionTarget` to buttons, not hash links.
+
+Exception: **LegalToc** on policy pages may keep in-document `#` anchors for shareable links within one long page.

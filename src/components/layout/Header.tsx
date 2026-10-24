@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 import { homeHeroHref, navLinks, siteConfig } from "@/data/site";
 import { Button } from "@/components/ui/button";
@@ -14,136 +14,52 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { navigateToPageSection } from "@/lib/section-nav";
 import Image from "next/image";
 import underlineImg from "@/public/homepage/underline.png";
 
-function hashFromNavHref(href: string) {
-  const hashIndex = href.indexOf("#");
-  return hashIndex === -1 ? "" : href.slice(hashIndex);
+function getSectionTarget(href: string) {
+  if (href === homeHeroHref) return { path: "/", id: "home" };
+  if (href === "/#destinations") return { path: "/", id: "destinations" };
+  return null;
 }
 
-function isNavLinkActive(pathname: string, href: string, hash: string) {
-  const hashIndex = href.indexOf("#");
-  if (hashIndex !== -1) {
-    const pathPart = href.slice(0, hashIndex) || "/";
-    const hashPart = href.slice(hashIndex);
-    return pathname === pathPart && hash === hashPart;
-  }
-
-  if (href === homeHeroHref) {
-    const hashNavActive = navLinks.some((link) => {
-      const i = link.href.indexOf("#");
-      if (i === -1) return false;
-      const hashPart = link.href.slice(i);
-      if (link.href === homeHeroHref) return false;
-      const pathPart = link.href.slice(0, i) || "/";
-      return pathname === pathPart && hash === hashPart;
-    });
-    return (
-      pathname === "/" &&
-      !hashNavActive &&
-      (hash === "" || hash === homeHeroHref.slice(homeHeroHref.indexOf("#")))
-    );
+function isNavLinkActive(
+  pathname: string,
+  href: string,
+  activeSection: string,
+) {
+  const sectionTarget = getSectionTarget(href);
+  if (sectionTarget) {
+    return pathname === sectionTarget.path && activeSection === sectionTarget.id;
   }
 
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-function subscribeToLocationHash(onStoreChange: () => void) {
-  const handleLinkClick = (event: MouseEvent) => {
-    if (
-      event.defaultPrevented ||
-      event.button !== 0 ||
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey
-    ) {
-      return;
-    }
-
-    const target = event.target;
-    if (!(target instanceof Element)) return;
-
-    const link = target.closest<HTMLAnchorElement>("a[href]");
-    if (!link) return;
-
-    const destination = new URL(link.href, window.location.href);
-    if (destination.origin !== window.location.origin || !destination.hash) return;
-
-    // Next.js hash navigation can update history without emitting hashchange.
-    // Notify after Link has completed its click handler so the active item uses
-    // the new hash even when the pathname remains unchanged.
-    window.setTimeout(onStoreChange, 0);
-  };
-
-  window.addEventListener("hashchange", onStoreChange);
-  window.addEventListener("popstate", onStoreChange);
-  document.addEventListener("click", handleLinkClick, true);
-  return () => {
-    window.removeEventListener("hashchange", onStoreChange);
-    window.removeEventListener("popstate", onStoreChange);
-    document.removeEventListener("click", handleLinkClick, true);
-  };
-}
-
-function getLocationHash() {
-  return window.location.hash;
-}
-
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
   const pathname = usePathname();
-  const locationHash = useSyncExternalStore(
-    subscribeToLocationHash,
-    getLocationHash,
-    () => "",
+  const router = useRouter();
+
+  const navigateToSection = useCallback(
+    (href: string) => {
+      const sectionTarget = getSectionTarget(href);
+      if (!sectionTarget) return;
+
+      setOpen(false);
+      setActiveSection(sectionTarget.id);
+
+      navigateToPageSection(
+        sectionTarget.path,
+        sectionTarget.id,
+        pathname,
+        router.push,
+      );
+    },
+    [pathname, router],
   );
-  // Next.js same-page hash links do not always emit hashchange before paint.
-  const [pendingHash, setPendingHash] = useState<string | null>(null);
-  // Keep the selected item stable while a route transition is in progress. Without
-  // this, clearing the hash for a non-hash route briefly makes Home active.
-  const [pendingNavHref, setPendingNavHref] = useState<string | null>(null);
-  const [pendingNavOrigin, setPendingNavOrigin] = useState<string | null>(null);
-  const hash =
-    pendingHash !== null && pendingHash !== locationHash
-      ? pendingHash
-      : locationHash;
-
-  const isNavigationPending =
-    pendingNavHref !== null &&
-    pendingNavOrigin === `${pathname}${locationHash}`;
-
-  const markNavigationPending = useCallback((href: string) => {
-    setPendingNavHref(href);
-    setPendingNavOrigin(`${pathname}${locationHash}`);
-    setPendingHash(hashFromNavHref(href));
-  }, [locationHash, pathname]);
-
-  useEffect(() => {
-    const markHashLinkActive = (event: MouseEvent) => {
-      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
-        return;
-      }
-
-      const target = event.target;
-      if (!(target instanceof Element)) return;
-
-      const link = target.closest<HTMLAnchorElement>("a[href]");
-      if (!link) return;
-
-      const destination = new URL(link.href, window.location.href);
-      if (destination.origin !== window.location.origin) return;
-
-      const href = `${destination.pathname}${destination.hash}`;
-      if (navLinks.some((navLink) => navLink.href === href)) {
-        markNavigationPending(href);
-      }
-    };
-
-    document.addEventListener("click", markHashLinkActive, true);
-    return () => document.removeEventListener("click", markHashLinkActive, true);
-  }, [markNavigationPending]);
 
   const [heroBannerInView, setHeroBannerInView] = useState(false);
 
@@ -182,6 +98,7 @@ export function Header() {
       <div className="mx-auto flex h-12 sm:h-16 max-w-7xl items-center justify-between pl-5 pr-6 sm:px-6 lg:px-8">
         <Link
           href="/"
+          onClick={() => setActiveSection("home")}
           className="font-heading text-2xl font-semibold tracking-tight text-brand"
         >
           {/* {siteConfig.name} */}
@@ -196,23 +113,17 @@ export function Header() {
 
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => {
-            const isActive = isNavigationPending
-              ? pendingNavHref === link.href
-              : isNavLinkActive(pathname, link.href, hash);
-
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => markNavigationPending(link.href)}
-                className={cn(
-                  "relative inline-block text-sm font-medium transition-colors md:text-lg text-[#1b1d1f] hover:text-brand hover:font-bold",
-                  isActive &&
-                    (homeHeaderOverHero
-                      ? "font-bold text-[#0E5E6F]"
-                      : "font-bold text-brand"),
-                )}
-              >
+            const sectionTarget = getSectionTarget(link.href);
+            const isActive = isNavLinkActive(pathname, link.href, activeSection);
+            const className = cn(
+              "relative inline-block text-sm font-medium transition-colors md:text-lg text-[#1b1d1f] hover:text-brand hover:font-bold",
+              isActive &&
+                (homeHeaderOverHero
+                  ? "font-bold text-[#0E5E6F]"
+                  : "font-bold text-brand"),
+            );
+            const content = (
+              <>
                 {link.label}
                 {isActive && (
                   <Image
@@ -224,14 +135,30 @@ export function Header() {
                     className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 h-[8px] w-[50px]"
                   />
                 )}
-              </Link>
+              </>
+            );
+
+            return (
+              sectionTarget ? (
+                <button
+                  key={link.href}
+                  type="button"
+                  onClick={() => navigateToSection(link.href)}
+                  className={className}
+                >
+                  {content}
+                </button>
+              ) : (
+                <Link key={link.href} href={link.href} className={className}>
+                  {content}
+                </Link>
+              )
             );
           })}
         </nav>
 
         <Link
           href="/contact"
-          onClick={() => markNavigationPending("/contact")}
           className="hidden h-10 cursor-pointer items-center justify-center rounded bg-[#ec575e] px-4 font-sans text-sm font-semibold text-white transition-all duration-300 hover:scale-104 hover:bg-[#dc4850] tab-0.98 md:inline-flex md:text-base"
         >
           Contact Us
@@ -265,33 +192,38 @@ export function Header() {
             </SheetHeader>
             <nav className="mt-8 flex flex-col gap-4">
               {navLinks.map((link) => {
-                const isActive = isNavigationPending
-                  ? pendingNavHref === link.href
-                  : isNavLinkActive(pathname, link.href, hash);
+                const sectionTarget = getSectionTarget(link.href);
+                const isActive = isNavLinkActive(pathname, link.href, activeSection);
+                const className = cn(
+                  "inline-block rounded-lg px-3 py-2 text-left text-base transition-colors hover:bg-sand hover:text-brand hover:font-bold",
+                  isActive && "font-bold text-brand",
+                );
 
                 return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => {
-                      markNavigationPending(link.href);
-                      setOpen(false);
-                    }}
-                    className={cn(
-                      "inline-block rounded-lg px-3 py-2 text-base transition-colors hover:bg-sand hover:text-brand hover:font-bold",
-                      isActive && "font-bold text-brand",
-                    )}
-                  >
-                    {link.label}
-                  </Link>
+                  sectionTarget ? (
+                    <button
+                      key={link.href}
+                      type="button"
+                      onClick={() => navigateToSection(link.href)}
+                      className={className}
+                    >
+                      {link.label}
+                    </button>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className={className}
+                    >
+                      {link.label}
+                    </Link>
+                  )
                 );
               })}
               <Link
                 href="/contact"
-                onClick={() => {
-                  markNavigationPending("/contact");
-                  setOpen(false);
-                }}
+                onClick={() => setOpen(false)}
                 className={cn(
                   "inline-block rounded-lg px-3 py-2 text-base transition-colors hover:bg-sand hover:text-brand hover:font-bold",
                   pathname === "/contact" && "font-bold text-brand",
