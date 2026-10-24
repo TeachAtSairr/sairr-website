@@ -58,7 +58,7 @@ export function PuriMoments({
           />
         </FadeIn>
 
-        <div className="mt-4 sm:mt-8">
+        <div className="mt-4 sm:mt-6">
           <CarouselSection
             trackWrapperClassName={cn(
               "overflow-hidden bg-[#E9DFC8] py-6 sm:py-8",

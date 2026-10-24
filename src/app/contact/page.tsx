@@ -80,10 +80,10 @@ export default function ContactPage() {
       {/* Hero */}
       <section
         data-header-hero
-        className="relative flex min-h-[442px] items-center justify-center overflow-hidden sm:min-h-[520px] lg:min-h-0 lg:aspect-[1513.87/580]"
+        className="relative flex min-h-[442px] items-center justify-center overflow-hidden sm:min-h-[520px] lg:aspect-[1470/490.29]"
       >
         <Image
-          src="/contact/contact-bg1.webp"
+          src="/contact/contact-bg2.webp"
           alt=""
           fill
           priority
@@ -101,10 +101,10 @@ export default function ContactPage() {
         <div className="relative z-10 mx-auto px-4 pb-20 pt-20 text-center text-white sm:px-6 sm:pb-24 sm:pt-2">
           <FadeIn>
             <h1 className="font-heading text-3xl font-semibold leading-tight sm:text-4xl md:text-[2.75rem]">
-            Let’s plan your next journey
+              Let’s plan your next journey
             </h1>
             <p className="mx-auto mt-0 text-base leading-relaxed text-white sm:text-lg md:text-xl">
-            Planning a trip or curious about Sairr? Write, call, or WhatsApp us.
+              Planning a trip or curious about Sairr? Write, call, or WhatsApp us.
             </p>
           </FadeIn>
         </div>
@@ -113,7 +113,7 @@ export default function ContactPage() {
       {/* Contact card */}
       <div className="relative z-10 mx-3 md:mx-auto max-w-6xl pb-12">
         <div
-          className="-mt-[8.6rem] overflow-hidden rounded-lg bg-white shadow-[0_20px_50px_rgba(0,0,0,0.08)] sm:-mt-24 sm:rounded-lg lg:-mt-[16.5rem]"
+          className="-mt-[8.6rem] overflow-hidden rounded-lg bg-white shadow-[0_20px_50px_rgba(0,0,0,0.08)] sm:-mt-24 sm:rounded-lg lg:-mt-[15rem]"
         >
           <div className="flex flex-col lg:grid lg:grid-cols-2 lg:items-stretch">
             {/* Form first on mobile */}
@@ -125,7 +125,7 @@ export default function ContactPage() {
                 <div className="text-2xl font-semibold text-white sm:text-[1.75rem]">
                   Get in touch
                 </div>
-              
+
                 <div className="mt-3 md:mt-6">
                   <ContactUsForm appearance="teal" />
                 </div>
