@@ -83,7 +83,7 @@ export default function ContactPage() {
         className="relative flex min-h-[442px] items-center justify-center overflow-hidden sm:min-h-[520px] lg:min-h-0 lg:aspect-[1513.87/580]"
       >
         <Image
-          src="/contact/contact-bg.webp"
+          src="/contact/contact-bg1.webp"
           alt=""
           fill
           priority
@@ -139,7 +139,7 @@ export default function ContactPage() {
                   Prefer to reach out directly?
                 </div>
 
-                <div className="mt-8 md:mt-4 space-y-3">
+                <div className="mt-4 md:mt-4 space-y-3">
                   <ContactChannel
                     href={whatsappHref(
                       "Hi, I'd like to know more about travelling with Sairr.",

@@ -21,7 +21,7 @@ export default function ThankYouPage() {
     <main className="bg-[#FDFBF2]">
       <section
         data-header-hero
-        className="relative flex min-h-[360px] items-start overflow-hidden sm:min-h-[400px] lg:min-h-0 lg:aspect-[1513.87/580]"
+        className="relative flex min-h-[250px] items-start overflow-hidden sm:min-h-[400px] lg:min-h-0 lg:aspect-[1513.87/450]"
       >
         <Image
           src="/thankyou-banner2.webp"
@@ -50,7 +50,7 @@ export default function ThankYouPage() {
         >
           <div className="flex flex-col lg:grid lg:grid-cols-2 lg:items-stretch">
             <div
-              className="flex flex-col px-6 sm:px-10 py-6 lg:min-h-[20rem] lg:h-full"
+              className="flex flex-col px-6 sm:px-10 py-6 lg:min-h-[20rem] lg:h-full rounded-b-lg sm:rounded-r-lg"
               style={{ backgroundColor: TEAL }}
             >
               <FadeIn className="flex flex-1 flex-col">
@@ -88,11 +88,11 @@ export default function ThankYouPage() {
             {/* talk directly */}
             <div className="flex flex-col bg-[#F5F0E1] px-4 py-6 md:pt-8 md:pb-6 sm:px-10 lg:h-full">
               <FadeIn delay={0.1} className="flex flex-1 flex-col">
-                <h2 className="font-heading text-2xl font-semibold text-black sm:text-[1.75rem]">
+                <div className="text-lg font-semibold text-black sm:text-[1.75rem]">
                   Prefer to talk now?
-                </h2>
+                </div>
 
-                <div className="mt-5 flex flex-row gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                <div className="mt-3 sm:mt-5 flex flex-row gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                   <a
                     href={phoneHref()}
                     className="inline-flex h-10 md:h-[3.2rem] items-center justify-center gap-2 rounded-[4px] bg-[#EC575E] px-4 md:px-6 text-xs md:text-[18.93px] font-semibold text-white transition-colors hover:bg-[#EC575E]/90 min-w-[9rem] sm:min-w-[13.5rem]"

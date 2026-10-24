@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import {
@@ -14,6 +13,7 @@ import bannerUnderlineImg from "@/public/homepage/banner-underline.png";
 import { useContactFormDialog } from "@/components/forms/ContactFormDialogProvider";
 import { ctaClass } from "@/lib/cta";
 import { cn } from "@/lib/utils";
+import { scrollToSectionId, stripHashFromUrl } from "@/lib/section-nav";
 import {
   drawLine,
   fadeDown,
@@ -195,12 +195,16 @@ export function HeroSection() {
             className="mx-auto mt-10 flex w-[13rem] md:w-[16.25rem] max-w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:items-center sm:gap-4"
           >
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
-              <Link
-                href="#destinations"
-                className="bg-[#ec575e] capitalize hover:bg-[#dc4850] inline-flex h-10 md:h-12 w-[80%] sm:w-full items-center justify-center gap-2 whitespace-nowrap rounded px-6 text-xs md:text-sm font-semibold text-white transition-opacity sm:w-auto sm:min-w-[12rem]"
+              <button
+                type="button"
+                onClick={() => {
+                  stripHashFromUrl();
+                  scrollToSectionId("destinations");
+                }}
+                className="bg-[#ec575e] capitalize hover:bg-[#dc4850] inline-flex h-10 md:h-12 w-[80%] sm:w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded px-6 text-xs md:text-sm font-semibold text-white transition-opacity sm:w-auto sm:min-w-[12rem]"
               >
                 Explore Destinations
-              </Link>
+              </button>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
@@ -224,13 +228,17 @@ export function HeroSection() {
         </motion.div>
       </motion.div>
 
-      <motion.a
-        href="#whySairr"
-        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/70 transition-colors hover:text-white"
+      <motion.button
+        type="button"
+        onClick={() => {
+          stripHashFromUrl();
+          scrollToSectionId("whySairr");
+        }}
+        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 cursor-pointer flex-col items-center gap-2 border-0 bg-transparent text-white/70 transition-colors hover:text-white"
         initial={reduceMotion ? false : { opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: reduceMotion ? 0 : 1.2, duration: 0.6 }}
-        aria-label="Scroll to destinations"
+        aria-label="Scroll to Why Sairr"
       >
         <span className="text-[10px] font-medium uppercase tracking-[0.2em]">
           Scroll
@@ -247,7 +255,7 @@ export function HeroSection() {
             <span className="block h-8 w-px bg-gradient-to-b from-white/60 to-transparent" />
           </motion.span>
         )}
-      </motion.a>
+      </motion.button>
     </section>
   );
 }

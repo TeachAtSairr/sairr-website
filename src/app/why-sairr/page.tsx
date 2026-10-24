@@ -151,18 +151,22 @@ export default function WhySairrPage() {
           <FadeIn>
             <div className="relative rounded-lg border border-[#C8A867] bg-[#FDFBF2] px-5 pb-8 pt-14 sm:px-8 sm:pb-10 sm:pt-16 md:pt-24 lg:pt-28">
               <div
-                className="absolute left-1/2 top-0 flex max-w-[calc(100%-2rem)] -translate-x-1/2 sm:-translate-x-2/3 -translate-y-1/2 items-center gap-2 sm:gap-3 bg-[#FDFBF2] px-2 sm:px-3 sm:max-w-none md:gap-4 md:px-5"
+                className="absolute left-1/2 top-0 flex max-w-[calc(100%-1.5rem)] -translate-x-[58%] -translate-y-1/2 items-center gap-1.5 bg-[#FDFBF2] px-1.5 sm:max-w-none sm:-translate-x-2/3 sm:gap-3 sm:px-3 md:gap-4 md:px-5"
               >
                 <Image
                   src="/why-sairr/confused-couple.svg"
                   alt=""
                   width={98.93}
                   height={105.06}
-                  className="w-14 sm:w-20 md:w-[98.93px] h-auto md:h-[105.06px] shrink-0"
+                  className="h-auto w-12 shrink-0 sm:w-20 md:h-[105.06px] md:w-[98.93px]"
                   aria-hidden
                 />
-                <h2 className="font-heading text-lg font-semibold text-black sm:text-2xl lg:text-[2.25rem]">
-                  What gets in the way
+                <h2
+                  className="font-heading text-base font-semibold leading-[1.15] text-black sm:text-2xl sm:leading-tight lg:text-[2.25rem]"
+                >
+                  What gets
+                  <br className="sm:hidden" />
+                  {" "}in the way
                 </h2>
               </div>
               <div className="mt-2 sm:mt-0 grid gap-8 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-16">
@@ -193,8 +197,8 @@ export default function WhySairrPage() {
       </section>
 
       {/* Gap Sairr fills */}
-      <section className="relative overflow-hidden bg-[#0E5E6F] py-8 sm:py-14 lg:py-10">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-1">
+      <section className="relative overflow-hidden bg-[#0E5E6F] py-6 sm:py-14 lg:py-10">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-1">
           <FadeIn>
             <div className="text-left">
               <h2 className="font-heading text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-[2.313rem]">

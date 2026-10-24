@@ -88,8 +88,8 @@ export function PuriMoments({
             showDots
             controlsPosition="split"
             controlsClassName="mt-5"
-            previousButtonClassName="border-transparent bg-[#C8A867] text-white hover:bg-[#B99656] disabled:bg-[#F0F0F099] disabled:text-charcoal/50 disabled:opacity-100"
-            nextButtonClassName="border-transparent bg-[#C8A867] text-white hover:bg-[#B99656] disabled:bg-[#F0F0F099] disabled:text-charcoal/50 disabled:opacity-100"
+            previousButtonClassName="size-8 rounded border border-charcoal/15 bg-white text-charcoal transition-colors hover:border-charcoal/30 hover:bg-white disabled:cursor-not-allowed disabled:opacity-35 [&_svg]:size-5"
+            nextButtonClassName="size-8 rounded border border-charcoal/15 bg-white text-charcoal transition-colors hover:border-charcoal/30 hover:bg-white disabled:cursor-not-allowed disabled:opacity-35 [&_svg]:size-5"
           />
         </div>
       </div>

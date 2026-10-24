@@ -38,7 +38,7 @@ export function ExperienceCtaSection({
 }: ExperienceCtaSectionProps) {
   return (
     <section
-      className={cn("px-4 py-8 sm:px-6 sm:py-20 lg:px-8 lg:py-16", className)}
+      className={cn("px-4 py-8 sm:px-6 sm:py-20 lg:px-8 lg:py-12", className)}
       style={className?.includes("bg-") ? undefined : { backgroundColor: GOLD_BG }}
     >
       <div className="mx-auto max-w-3xl text-center">
@@ -53,7 +53,7 @@ export function ExperienceCtaSection({
           heading={heading}
           description={para}
           headingClassName="font-heading text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-[2.5rem]"
-          descriptionClassName="max-w-xl text-white/95 sm:text-lg"
+          descriptionClassName="max-w-2xl text-white/95 sm:text-lg"
         />
 
         <FadeIn delay={0.15}>

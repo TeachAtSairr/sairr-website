@@ -38,7 +38,7 @@ export const navLinks = [
 export const exploreLinks = [
   { href: "/#destinations", label: "Destinations" },
   { href: "/why-sairr", label: "Why Sairr" },
-  { href: "#", label: "About Sairr" },
+  { href: "/about", label: "About Sairr" },
 ] as const;
 
 export const legalLinks = [

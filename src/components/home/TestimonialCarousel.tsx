@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Testimonial } from "@/data/testimonials";
 import { TestimonialCard } from "@/components/shared/TestimonialCard";
@@ -28,16 +28,17 @@ export function TestimonialCarousel({
   const [atEnd, setAtEnd] = useState(false);
   const [activeDotIndex, setActiveDotIndex] = useState(0);
 
-  function updateNavigationState() {
+  const updateNavigationState = useCallback(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    setAtStart(carousel.scrollLeft <= 1);
-    setAtEnd(
-      carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 1,
-    );
-
     const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+    const isAtStart = carousel.scrollLeft <= 4 || maxScroll <= 0;
+    const isAtEnd = carousel.scrollLeft >= maxScroll - 4 || maxScroll <= 0;
+
+    setAtStart(isAtStart);
+    setAtEnd(isAtEnd);
+
     if (maxScroll > 0 && testimonials.length > 1) {
       setActiveDotIndex(
         Math.min(
@@ -53,7 +54,7 @@ export function TestimonialCarousel({
     } else {
       setActiveDotIndex(0);
     }
-  }
+  }, [testimonials.length]);
 
   function scrollToDot(dotIndex: number) {
     const carousel = carouselRef.current;
@@ -73,12 +74,22 @@ export function TestimonialCarousel({
     const firstCard = carousel?.firstElementChild as HTMLElement | null;
     if (!carousel || !firstCard) return;
 
-    carousel.scrollBy({
-      left:
-        (firstCard.offsetWidth + getSlideGapPx()) *
-          (direction === "next" ? 1 : -1),
-      behavior: "smooth",
-    });
+    const step = firstCard.offsetWidth + getSlideGapPx();
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+    if (direction === "previous") {
+      const target = carousel.scrollLeft - step;
+      carousel.scrollTo({
+        left: target <= 10 ? 0 : target,
+        behavior: "smooth",
+      });
+    } else {
+      const target = carousel.scrollLeft + step;
+      carousel.scrollTo({
+        left: target >= maxScroll - 10 ? maxScroll : target,
+        behavior: "smooth",
+      });
+    }
   }
 
   useEffect(() => {
@@ -88,15 +99,19 @@ export function TestimonialCarousel({
 
     const observer = new ResizeObserver(updateNavigationState);
     observer.observe(carousel);
-    return () => observer.disconnect();
-  }, [testimonials.length]);
+    window.addEventListener("resize", updateNavigationState);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateNavigationState);
+    };
+  }, [updateNavigationState]);
 
   return (
     <div className="mt-8 md:mt-10">
       <div
         ref={carouselRef}
         onScroll={updateNavigationState}
-        className="-mr-1 flex gap-5 overflow-x-auto scroll-smooth px-4 pb-5 pt-1 snap-x snap-mandatory scrollbar-none sm:-mr-6 md:gap-10 lg:-mr-8 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="-mr-1 flex gap-5 overflow-x-auto scroll-smooth px-4 scroll-px-4 pb-5 pt-1 snap-x snap-mandatory scrollbar-none sm:-mr-6 md:gap-10 lg:-mr-8 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         aria-label="Traveller stories"
         aria-roledescription="carousel"
       >
