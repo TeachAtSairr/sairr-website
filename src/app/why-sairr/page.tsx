@@ -68,8 +68,8 @@ const faqSection = {
 
 const ctaContent = {
   eyebrow: "START A CONVERSATION",
-  heading: "Always something to look forward to.",
-  para: "Say yes to the journey. We’ll take care of the rest.",
+  heading: "Shall we go on a Sairr?",
+  para: "You show up. We’ll take care of the rest.",
   primaryCtaLabel: "Get a Callback",
   whatsappLabel: "WhatsApp us",
   whatsappMessage: "Hi Sairr — I'd like to talk about travelling with Sairr.",
