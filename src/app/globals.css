@@ -160,3 +160,18 @@
     @apply font-heading;
   }
 }
+
+/* Hero background video: decorative only — no native play UI / tap-to-play */
+.hero-bg-video {
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.hero-bg-video::-webkit-media-controls,
+.hero-bg-video::-webkit-media-controls-start-playback-button,
+.hero-bg-video::-webkit-media-controls-play-button,
+.hero-bg-video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0;
+}
