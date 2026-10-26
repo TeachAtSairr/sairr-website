@@ -20,7 +20,6 @@ export default function HomePage() {
     <>
       <HeroSection />
       <WhySairrSection />
-      <div className="-mt-16" />
       <JourneysSection />
       <WorkBehindTheEaseSection />
       <RealTravellersSection />
