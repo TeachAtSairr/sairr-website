@@ -271,11 +271,11 @@ export default function WhySairrPage() {
                       Before you book
                     </div>
                     <Image
-                      src="/why-sairr/cab-service.webp"
+                      src="/why-sairr/cab-service2.webp"
                       alt="Sairr travellers greeted at the airport"
-                      width={237}
-                      height={205.83}
-                      className="block sm:hidden mx-auto my-6 object-cover w-[200px] sm:w-[237px] h-auto lg:w-[237px] lg:h-[205.83px] shrink-0"
+                      width={406.76}
+                      height={210.83}
+                      className="block sm:hidden mx-auto my-6 object-cover shrink-0"
                     />
                     <p className="mt-3 text-sm md:text-base">
                       Before a trip opens for booking, every route, stay,
@@ -298,11 +298,11 @@ export default function WhySairrPage() {
                   </div>
                 </div>
                 <Image
-                  src="/why-sairr/cab-service.webp"
+                  src="/why-sairr/cab-service2.webp"
                   alt="Sairr travellers greeted at the airport"
-                  width={237}
-                  height={205.83}
-                  className="hidden sm:block object-cover w-[200px] sm:w-[237px] h-auto lg:w-[237px] lg:h-[205.83px] shrink-0"
+                  width={406.76}
+                  height={210.83}
+                  className="hidden sm:block object-cover w-[200px] sm:w-[345.746px] h-auto lg:w-[406.76px] lg:h-[210.83px] shrink-0"
                 />
               </div>
             </FadeIn>
