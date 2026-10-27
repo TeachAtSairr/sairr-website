@@ -130,7 +130,10 @@ function IconBeliefCard({
 
 export function WhySairrSection() {
   return (
-    <section id="whySairr" className="border-t border-charcoal/10 bg-[#FDFBF2]">
+    <section
+      id="whySairr"
+      className="relative z-10 border-t border-charcoal/10 bg-[#FDFBF2]"
+    >
       <div className="mb-[3.8rem] mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-12 lg:px-8 lg:pb-14 lg:pt-20">
         <FadeIn>
           <div className="mx-auto max-w-3xl text-center">

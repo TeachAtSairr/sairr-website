@@ -16,8 +16,8 @@ import puri3 from "@/public/homepage/journey-puri-3.webp";
 import rameshwaram from "@/public/homepage/journey-rameshwaram.webp";
 import andaman from "@/public/homepage/journey-andaman.webp";
 import bali from "@/public/homepage/journey-bali.webp";
-import backgroundImgDesktop from "@/public/homepage/Bg-Destination-Home.webp";
-import backgroundImgMobile from "@/public/homepage/Bg-Destination-Home-mob2.webp";
+const JOURNEYS_BG_DESKTOP = "/homepage/journeySection-bg-img.webp";
+const JOURNEYS_BG_MOBILE = "/homepage/Bg-Destination-Home-mob2.webp";
 import { drawLine } from "@/lib/motion";
 import bannerUnderlineImg from "@/public/homepage/underline-journey.png";
 
@@ -100,7 +100,10 @@ export function JourneysSection() {
   }
 
   return (
-    <section id="destinations" className="relative scroll-mt-16 bg-[#FDFBF2]">
+    <section
+      id="destinations"
+      className="relative z-0 -mt-16 scroll-mt-16 bg-[#FDFBF2]"
+    >
       <div className="mx-auto max-w-7xl px-4 pt-0 sm:px-6 md:px-0 lg:pt-2">
         <FadeIn>
           <div className="mx-auto max-w-4xl text-center">
@@ -123,20 +126,20 @@ export function JourneysSection() {
         </FadeIn>
       </div>
 
-      <div className="relative w-full">
+      <div className="relative isolate w-full">
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full aspect-[393/354] md:aspect-[1514/553]"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full aspect-[393/354] md:aspect-[4410/1773]"
           aria-hidden
         >
           <Image
-            src={backgroundImgMobile}
+            src={JOURNEYS_BG_MOBILE}
             alt=""
             fill
             className="object-cover object-bottom md:hidden"
             sizes="100vw"
           />
           <Image
-            src={backgroundImgDesktop}
+            src={JOURNEYS_BG_DESKTOP}
             alt=""
             fill
             className="hidden object-cover object-bottom md:block"

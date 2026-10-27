@@ -53,7 +53,7 @@ export function ExperienceCtaSection({
           heading={heading}
           description={para}
           headingClassName="font-heading text-[1.75rem] font-semibold tracking-tight text-white sm:text-4xl lg:text-[2.5rem]"
-          descriptionClassName="max-w-2xl text-white/95 sm:text-lg"
+          descriptionClassName="-mt-2 md:mt-0 max-w-2xl text-white/95 sm:text-lg"
         />
 
         <FadeIn delay={0.15}>

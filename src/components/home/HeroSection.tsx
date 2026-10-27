@@ -99,18 +99,40 @@ export function HeroSection() {
         viewportAspect > videoAspect ? "50% 28%" : "50% 50%";
     }
 
-    function setupVideo(video: HTMLVideoElement) {
+    function setupVideo(video: HTMLVideoElement, shouldPlay: boolean) {
       video.addEventListener("loadedmetadata", () => updateVideoFit(video));
       updateVideoFit(video);
-      if (!reduceMotion) {
+      if (!reduceMotion && shouldPlay) {
         void video.play().catch(() => {});
       } else {
         video.pause();
       }
     }
 
-    if (desktop) setupVideo(desktop);
-    if (mobile) setupVideo(mobile);
+    const mq = window.matchMedia("(min-width: 768px)");
+    function syncActivePlayback() {
+      const useDesktop = mq.matches;
+      if (desktop) {
+        if (!reduceMotion && useDesktop) void desktop.play().catch(() => {});
+        else desktop.pause();
+      }
+      if (mobile) {
+        if (!reduceMotion && !useDesktop) void mobile.play().catch(() => {});
+        else mobile.pause();
+      }
+    }
+
+    const isDesktop = mq.matches;
+    if (desktop) setupVideo(desktop, isDesktop);
+    if (mobile) setupVideo(mobile, !isDesktop);
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState !== "visible" || reduceMotion) return;
+      syncActivePlayback();
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    mq.addEventListener("change", syncActivePlayback);
 
     const resizeObserver = new ResizeObserver(() => {
       if (desktop) updateVideoFit(desktop);
@@ -119,6 +141,8 @@ export function HeroSection() {
     if (section) resizeObserver.observe(section);
 
     return () => {
+      mq.removeEventListener("change", syncActivePlayback);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       resizeObserver.disconnect();
     };
   }, [reduceMotion]);
@@ -130,7 +154,7 @@ export function HeroSection() {
       ref={sectionRef}
       className="relative min-h-dvh scroll-mt-24 overflow-hidden"
     >
-      <div className="absolute inset-0 overflow-hidden" aria-hidden>
+      <div className="pointer-events-none select-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
         <motion.div
           className="absolute inset-0 flex items-center justify-center origin-[50%_40%]"
           style={{ scale: videoScale }}
@@ -143,7 +167,9 @@ export function HeroSection() {
             loop
             playsInline
             preload="auto"
-            className="hidden md:block min-h-full min-w-full max-h-none max-w-none object-cover"
+            tabIndex={-1}
+            aria-hidden
+            className="hero-bg-video pointer-events-none select-none hidden md:block min-h-full min-w-full max-h-none max-w-none object-cover"
           >
             <source src="/homepage/Desktop_Website cover video.mp4" type="video/mp4" />
           </video>
@@ -155,17 +181,19 @@ export function HeroSection() {
             loop
             playsInline
             preload="auto"
-            className="block md:hidden min-h-full min-w-full max-h-none max-w-none object-cover"
+            tabIndex={-1}
+            aria-hidden
+            className="hero-bg-video pointer-events-none select-none block md:hidden min-h-full min-w-full max-h-none max-w-none object-cover"
           >
             <source src="/homepage/Mobile_website cover video.mp4" type="video/mp4" />
           </video>
         </motion.div>
-        <div className="absolute inset-0 bg-charcoal/30" />
+        <div className="pointer-events-none absolute inset-0 bg-charcoal/30" />
       </div>
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative mx-auto flex min-h-dvh max-w-4xl items-center justify-center px-4 pb-16 pt-28 text-center sm:px-6 lg:px-8"
+        className="relative z-10 mx-auto flex min-h-dvh max-w-4xl items-center justify-center px-4 pb-16 pt-28 text-center sm:px-6 lg:px-8"
       >
         <motion.div
           initial={reduceMotion ? false : "hidden"}
