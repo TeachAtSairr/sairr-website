@@ -10,7 +10,7 @@ import { WorkBehindTheEaseSection } from "@/components/home/WorkBehindTheEaseSec
 import { galleryImages } from "@/data/gallery";
 
 export const metadata = createMetadata({
-  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+  title: siteConfig.title,
   description: siteConfig.description,
   path: "/",
 });
