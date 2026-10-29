@@ -15,6 +15,7 @@ import {
   type ContactUsFormFieldValues,
 } from "@/lib/validations/contact-us";
 import { submitToGoogleSheet } from "@/lib/submit-to-sheet";
+import { formatSubmissionTimestamp, sendEmailAlert } from "@/lib/send-email-alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -55,6 +56,42 @@ type ContactUsFormProps = {
   /** Teal panel styling for the contact page. */
   appearance?: "default" | "teal";
 };
+
+function frameContactUsEmail(data: ContactUsFormData) {
+  const timestamp = formatSubmissionTimestamp();
+  const subject = "New Contact Inquiry (Contact Us)";
+
+  const text = `${subject}
+
+Timestamp: ${timestamp}
+Name: ${data.name || "-"}
+Phone: ${data.phone || "-"}
+Email: ${data.email || "-"}
+Topic: ${data.topic || "-"}
+Number of Travellers: ${data.numberOfTravellers != null ? data.numberOfTravellers : "-"}
+Preferred Date: ${data.preferredDate || "-"}
+How Did You Hear: ${data.howDidYouHear || "-"}
+Message: ${data.message || "-"}`;
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; font-size: 14px; color: #1c2a26; max-width: 600px; line-height: 1.6;">
+      <h2 style="color: #1f3a34; margin-bottom: 16px;">${subject}</h2>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold; width: 170px;">Timestamp</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${timestamp}</td></tr>
+        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Name</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${data.name || "-"}</td></tr>
+        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Phone</td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="tel:${data.phone}" style="color: #1c2a26;">${data.phone || "-"}</a></td></tr>
+        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Email</td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="mailto:${data.email}">${data.email || "-"}</a></td></tr>
+        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Topic</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${data.topic || "-"}</td></tr>
+        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Number of Travellers</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${data.numberOfTravellers != null ? data.numberOfTravellers : "-"}</td></tr>
+        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Preferred Date</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${data.preferredDate || "-"}</td></tr>
+        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">How Did You Hear</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${data.howDidYouHear || "-"}</td></tr>
+        <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Message</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${data.message || "-"}</td></tr>
+      </table>
+    </div>
+  `;
+
+  return { subject, text, html };
+}
 
 export function ContactUsForm({
   onSubmitted,
@@ -106,6 +143,12 @@ export function ContactUsForm({
         tabName: "ContactUs",
         columns: "A:J",
         values: formatContactUsRowForSheet(payload),
+      });
+
+      // Sheet API returned 200 OK — send email alert
+      const emailContent = frameContactUsEmail(data);
+      await sendEmailAlert(emailContent).catch((err) => {
+        console.error("Failed to send contact inquiry alert email:", err);
       });
 
       onSubmitted?.();
