@@ -5,18 +5,8 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/destinations",
-        destination: "/#destinations",
+        destination: "/?section=destinations",
         permanent: false,
-      },
-      {
-        source: "/experiences",
-        destination: "/#destinations",
-        permanent: false,
-      },
-      {
-        source: "/experiences/:slug",
-        destination: "/destinations/:slug",
-        permanent: true,
       },
     ];
   },

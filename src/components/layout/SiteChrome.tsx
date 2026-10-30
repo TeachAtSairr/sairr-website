@@ -16,14 +16,43 @@ export function SiteChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    const sectionId = consumeScheduledSectionScroll();
-    if (!sectionId) return;
+    // Only scroll to homepage sections when on the homepage
+    if (pathname !== "/") return;
 
-    const frame = window.requestAnimationFrame(() => {
-      scrollToSectionId(sectionId);
-    });
+    const scheduled = consumeScheduledSectionScroll();
+    const hash =
+      typeof window !== "undefined" && window.location.hash
+        ? window.location.hash.replace("#", "")
+        : null;
+    const urlParams =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("section")
+        : null;
 
-    return () => window.cancelAnimationFrame(frame);
+    const targetId = scheduled || hash || urlParams;
+    if (!targetId) return;
+
+    // Clean address bar so no ugly hash or query param remains
+    if (hash || urlParams) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+
+    let attempts = 0;
+    const maxAttempts = 50; // poll for up to 4 seconds
+    const interval = setInterval(() => {
+      attempts++;
+      const el = document.getElementById(targetId);
+      if (el) {
+        clearInterval(interval);
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 80);
+      } else if (attempts >= maxAttempts) {
+        clearInterval(interval);
+      }
+    }, 80);
+
+    return () => clearInterval(interval);
   }, [pathname]);
 
   return (

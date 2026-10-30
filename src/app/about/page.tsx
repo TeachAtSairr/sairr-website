@@ -9,7 +9,7 @@ import { siteConfig } from "@/data/site";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "About Sairr — Our Story & Mission",
+  title: "About Sairr",
   description:
     "Meet the founder behind Sairr and learn why we're building thoughtful travel experiences for travellers over 50 and families across India.",
   path: "/about",
@@ -169,9 +169,9 @@ export default function AboutPage() {
             <div className="rounded-2xl border border-[#E9DFC8] bg-white p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] sm:rounded-3xl sm:p-8 lg:p-10">
               <div className="grid grid-cols-1 gap-8 md:grid-cols-[240px_1fr] lg:grid-cols-[260px_1fr] lg:gap-12 items-start">
                 <div>
-                <div className="block md:hidden text-xl mb-3 font-semibold text-[#0E5E6F] sm:text-[1.375rem]">
-                  A note from the founder
-                </div>
+                  <div className="block md:hidden text-xl mb-3 font-semibold text-[#0E5E6F] sm:text-[1.375rem]">
+                    A note from the founder
+                  </div>
                   <div className="relative aspect-[780/675] w-full overflow-hidden rounded-xl sm:rounded-2xl">
                     <Image
                       src="/about-us/tanmay.webp"

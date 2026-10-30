@@ -44,5 +44,4 @@ export const exploreLinks = [
 export const legalLinks = [
   { href: "/privacy-policy", label: "Privacy Policy" },
   { href: "/terms-and-conditions", label: "Terms and Conditions" },
-  { href: "/cancellation", label: "Cancellation and Refund Policy" },
 ] as const;

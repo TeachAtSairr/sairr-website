@@ -76,7 +76,7 @@ const ctaContent = {
 };
 
 export const metadata = createMetadata({
-  title: "Why Sairr — How We Plan Thoughtful Travel",
+  title: "Why Sairr",
   description:
     "Discover how Sairr combines safety, comfort, and family peace of mind to create travel experiences your loved ones will cherish.",
   path: "/why-sairr",
