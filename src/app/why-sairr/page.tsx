@@ -153,7 +153,7 @@ export default function WhySairrPage() {
       <section className="bg-[#FDFBF2] pt-12 pb-16 sm:pb-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="relative rounded-lg border border-[#C8A867] bg-[#FDFBF2] px-5 pb-8 pt-14 sm:px-8 sm:pb-10 sm:pt-16 md:pt-24 lg:pt-28">
+            <div className="relative rounded-lg border border-[#C8A867] bg-[#FDFBF2] px-5 pb-8 pt-14 sm:px-8 sm:pb-10 sm:pt-16 md:pt-24">
               <div className="absolute left-1/2 -top-10 -translate-x-1/2 bg-[#FDFBF2] px-3 sm:hidden">
                 <Image
                   src="/why-sairr/confused-couple.svg"
@@ -180,7 +180,7 @@ export default function WhySairrPage() {
                   What gets in the way
                 </h2>
               </div>
-              <div className="mt-8 sm:mt-0 grid gap-8 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-16">
+              <div className="mt-8 sm:mt-0 grid gap-8 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-[3rem]">
                 {whatGetsInTheWay.map((item) => (
                   <div key={item.title} className="flex items-start sm:items-center gap-4 sm:gap-5">
                     <Image
@@ -271,9 +271,9 @@ export default function WhySairrPage() {
                       Before you book
                     </div>
                     <Image
-                      src="/why-sairr/cab-service2.webp"
+                      src="/why-sairr/cab-service2-2.webp"
                       alt="Sairr travellers greeted at the airport"
-                      width={406.76}
+                      width={424.76}
                       height={210.83}
                       className="block sm:hidden mx-auto my-6 object-cover shrink-0"
                     />
@@ -298,11 +298,11 @@ export default function WhySairrPage() {
                   </div>
                 </div>
                 <Image
-                  src="/why-sairr/cab-service2.webp"
+                  src="/why-sairr/cab-service2-2.webp"
                   alt="Sairr travellers greeted at the airport"
-                  width={406.76}
+                  width={424.76}
                   height={210.83}
-                  className="hidden sm:block object-cover w-[200px] sm:w-[345.746px] h-auto lg:w-[406.76px] lg:h-[210.83px] shrink-0"
+                  className="hidden sm:block object-cover w-[200px] sm:w-[345.746px] h-auto lg:w-[424.76px] lg:h-[210.83px] shrink-0"
                 />
               </div>
             </FadeIn>

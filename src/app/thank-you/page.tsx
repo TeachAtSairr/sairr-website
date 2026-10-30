@@ -77,8 +77,8 @@ export default function ThankYouPage() {
                   <div className="rounded-lg border-[0.5px] md:border-[1px] border-[#C8A867] p-2 md:p-4 backdrop-blur-[2px]">
                     <p className="text-[10px] sm:text-xs md:text-[13px] leading-relaxed text-white">
                       Our team is available from{" "}
-                      <span className="font-medium text-white">10 AM to 8 PM</span>
-                      , Monday to Sunday. If you reach us outside these hours,
+                      <span className="font-semibold text-white">10 AM to 8 PM, Monday to Sunday. </span>
+                      If you reach us outside these hours,
                       we&apos;ll reply when we&apos;re back.
                     </p>
                   </div>
@@ -95,7 +95,7 @@ export default function ThankYouPage() {
                 <div className="mt-3 sm:mt-5 flex flex-row gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                   <a
                     href={phoneHref()}
-                    className="inline-flex h-10 md:h-[3.2rem] items-center justify-center gap-2 rounded-[4px] bg-[#EC575E] px-4 md:px-6 text-xs md:text-[18.93px] font-semibold text-white transition-colors hover:bg-[#EC575E]/90 min-w-[9rem] sm:min-w-[13.5rem]"
+                    className="inline-flex h-10 md:h-[3.2rem] items-center justify-center gap-2 rounded-[4px] bg-[#EC575E] px-4 md:px-6 text-xs md:text-sm font-semibold text-white transition-colors hover:bg-[#EC575E]/90 min-w-[9rem] sm:min-w-[11rem]"
                   >
                     <Image
                       src="/phone.svg"
@@ -113,7 +113,7 @@ export default function ThankYouPage() {
                     )}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-[2.6rem] md:h-[3.2rem] items-center justify-center gap-2 rounded-[4px] border border-[#0E5E6F]/15 bg-white  px-4 md:px-6 text-xs md:text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-white/80 min-w-[9rem] sm:min-w-[13.5rem]"
+                    className="inline-flex h-[2.6rem] md:h-[3.2rem] items-center justify-center gap-2 rounded-[4px] border border-[#0E5E6F]/15 bg-white  px-4 md:px-6 text-xs md:text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-white/80 min-w-[9rem] sm:min-w-[11rem]"
                   >
                     <Image
                       src="/whatsapp-icon.svg"
