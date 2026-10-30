@@ -58,7 +58,7 @@ const grenettePro = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    default: siteConfig.title,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -68,12 +68,12 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: siteConfig.name,
+    title: siteConfig.title,
     description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    title: siteConfig.title,
     description: siteConfig.description,
   },
   robots: { index: true, follow: true },

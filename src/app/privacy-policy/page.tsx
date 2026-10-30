@@ -12,6 +12,7 @@ export const metadata = createMetadata({
   description:
     "How Sairr collects, uses, shares and protects your personal information — and the rights and choices available to you.",
   path: "/privacy-policy",
+  noIndex: true,
 });
 
 const tocItems = [

@@ -4,14 +4,9 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/experiences",
-        destination: "/destinations",
-        permanent: true,
-      },
-      {
-        source: "/experiences/:slug",
-        destination: "/destinations/:slug",
-        permanent: true,
+        source: "/destinations",
+        destination: "/?section=destinations",
+        permanent: false,
       },
     ];
   },

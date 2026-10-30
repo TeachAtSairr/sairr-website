@@ -1,9 +1,10 @@
 export const siteConfig = {
   name: "Sairr",
+  title: "Sairr: Travel designed for life after 50",
   legalName: "Meenadeep Experiences Pvt Ltd",
-  tagline: "More freedom to explore, less to worry about.",
+  tagline: "Travel designed for life after 50",
   description:
-    "Thoughtfully designed journeys for 50+ travellers. You show up. We handle the rest.",
+    "Thoughtfully designed journeys with 4-star+ stays, handpicked experiences, a dedicated host and door-to-door care.",
   url: "https://sairr.in",
   phone: "+91 99717 37186",
   email: "hello@sairr.in",
@@ -44,5 +45,4 @@ export const exploreLinks = [
 export const legalLinks = [
   { href: "/privacy-policy", label: "Privacy Policy" },
   { href: "/terms-and-conditions", label: "Terms and Conditions" },
-  { href: "/cancellation", label: "Cancellation and Refund Policy" },
 ] as const;
