@@ -11,6 +11,7 @@ export function legalMetadata({ title, path, heading }: Props) {
     title,
     description: `${heading} for Sairr and Meenadeep Experiences Pvt Ltd.`,
     path,
+    noIndex: true,
   });
 }
 

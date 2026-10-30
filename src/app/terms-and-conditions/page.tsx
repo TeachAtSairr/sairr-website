@@ -12,6 +12,7 @@ export const metadata = createMetadata({
   description:
     "How bookings, payments, changes, cancellations and support work when you travel with Sairr.",
   path: "/terms-and-conditions",
+  noIndex: true,
 });
 
 const keyTerms: { term: string; definition: string }[] = [
