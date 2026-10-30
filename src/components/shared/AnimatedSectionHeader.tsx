@@ -33,7 +33,7 @@ export function AnimatedSectionHeader({
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.55, ease: [0.25, 0.4, 0.25, 1] }}
           >
             <Tag className={headingClassName}>{heading}</Tag>
@@ -49,7 +49,7 @@ export function AnimatedSectionHeader({
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: true }}
             transition={{ delay: 0.35, duration: 0.6 }}
             className={cn(
               "mt-1 text-base leading-relaxed text-[#5d5d5d]",
