@@ -6,7 +6,7 @@ import { CardRevealCarouselItem } from "@/components/shared/CardReveal";
 import { TextReveal } from "@/components/shared/TextReveal";
 import { CarouselSection } from "@/components/shared/CarouselSection";
 import { cn } from "@/lib/utils";
-import { type PuriMomentCard } from "@/components/puri/puriMomentsData";
+import { type PuriMomentCard } from "@/data/puri";
 
 const MOMENT_CARD_WIDTH_PX = 306.38;
 
