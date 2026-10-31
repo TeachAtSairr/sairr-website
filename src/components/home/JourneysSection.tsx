@@ -112,16 +112,10 @@ export function JourneysSection() {
               text="Journeys to look forward to"
               className="font-heading text-[28px] leading-[1.1] font-semibold tracking-tight text-black sm:text-4xl lg:leading-tight"
             />
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.35, duration: 0.6 }}
-              className="mt-0 text-base leading-relaxed text-[#5d5d5d] sm:text-xl"
-            >
+            <p className="mt-0 text-base leading-relaxed text-[#5d5d5d] sm:text-xl">
               There should always be another place worth discovering. Choose
               yours.
-            </motion.p>
+            </p>
           </div>
         </FadeIn>
       </div>
