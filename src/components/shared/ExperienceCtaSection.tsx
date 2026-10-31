@@ -23,6 +23,7 @@ export type ExperienceCtaSectionProps = ExperienceCtaSectionData & {
   onPrimaryClick: () => void;
   primaryCtaClass?: string;
   className?: string;
+  showWhatsApp?: boolean;
 };
 
 export function ExperienceCtaSection({
@@ -35,6 +36,7 @@ export function ExperienceCtaSection({
   onPrimaryClick,
   primaryCtaClass,
   className,
+  showWhatsApp = true,
 }: ExperienceCtaSectionProps) {
   return (
     <section
@@ -69,22 +71,24 @@ export function ExperienceCtaSection({
               {primaryCtaLabel}
             </button>
 
-            <Link
-              href={whatsappHref(whatsappMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 w-[11rem] items-center justify-center gap-2 rounded border border-gray-300 bg-white px-6 text-sm font-semibold text-black opacity-70 transition-opacity hover:bg-gray-100 hover:opacity-90"
-            >
-              <Image
-                src={whatsappIcon}
-                alt=""
-                width={22}
-                height={22}
-                className="size-[22px] shrink-0"
-                aria-hidden
-              />
-              {whatsappLabel}
-            </Link>
+            {showWhatsApp && (
+              <Link
+                href={whatsappHref(whatsappMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 w-[11rem] items-center justify-center gap-2 rounded border border-gray-300 bg-white px-6 text-sm font-semibold text-black opacity-70 transition-opacity hover:bg-gray-100 hover:opacity-90"
+              >
+                <Image
+                  src={whatsappIcon}
+                  alt=""
+                  width={22}
+                  height={22}
+                  className="size-[22px] shrink-0"
+                  aria-hidden
+                />
+                {whatsappLabel}
+              </Link>
+            )}
           </div>
         </FadeIn>
       </div>

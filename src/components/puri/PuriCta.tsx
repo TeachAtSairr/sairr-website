@@ -17,6 +17,7 @@ export type PuriCtaProps = {
   ctaPage?: string;
   className?: string;
   hrefTxt?: string;
+  showWhatsApp?: boolean;
 };
 
 export function PuriCta({
@@ -26,6 +27,7 @@ export function PuriCta({
   ctaPage = "puri",
   className,
   hrefTxt,
+  showWhatsApp = true,
 }: PuriCtaProps) {
   const { openContactForm } = useContactFormDialog();
   const bottomCta = ctaClass(ctaPage, "bottom-cta", "primary");
@@ -35,6 +37,7 @@ export function PuriCta({
       {...sectionData}
       className={className}
       primaryCtaClass={bottomCta}
+      showWhatsApp={showWhatsApp}
       onPrimaryClick={() =>
         openContactForm({
           destination: notifyDestination,

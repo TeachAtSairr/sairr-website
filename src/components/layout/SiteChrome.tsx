@@ -7,6 +7,8 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingCallButton } from "@/components/layout/FloatingCallButton";
 import { FloatingCallProvider } from "@/components/layout/FloatingCallContext";
 import { Header } from "@/components/layout/Header";
+import { LPHeader } from "@/components/layout/LPHeader";
+import { LPFooter } from "@/components/layout/LPFooter";
 import {
   consumeScheduledSectionScroll,
   scrollToSectionId,
@@ -55,12 +57,14 @@ export function SiteChrome({ children }: { children: ReactNode }) {
     return () => clearInterval(interval);
   }, [pathname]);
 
+  const isLp = pathname.startsWith("/lp");
+
   return (
     <FloatingCallProvider>
-      <Header />
+      {isLp ? <LPHeader /> : <Header />}
       <main className="flex-1">{children}</main>
-      <Footer />
-      <FloatingCallButton />
+      {isLp ? <LPFooter /> : <Footer />}
+      {!isLp && <FloatingCallButton />}
     </FloatingCallProvider>
   );
 }
